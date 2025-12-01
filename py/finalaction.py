@@ -183,7 +183,7 @@ class RussianTextSummarizer:
 
     def load_and_prepare_data(self):
         """Загрузка и подготовка датасета"""
-        print("📊 Загрузка датасета...")
+        #print("📊 Загрузка датасета...")
 
         try:
             dataset = load_dataset("IlyaGusev/gazeta", split="train[:500]")
@@ -230,7 +230,7 @@ class RussianTextSummarizer:
 
     def train_model(self, output_dir="./russian_summarizer"):
         """Обучение модели"""
-        print("🎯 Начало обучения модели...")
+       # print("🎯 Начало обучения модели...")
 
         tokenized_datasets = self.load_and_prepare_data()
 
@@ -271,7 +271,7 @@ class RussianTextSummarizer:
         trainer.save_model()
         self.tokenizer.save_pretrained(output_dir)
 
-        print(f"✅ Модель сохранена в {output_dir}")
+        #print(f"✅ Модель сохранена в {output_dir}")
         return trainer
 
     def evaluate_summary(self, original_text, generated_summary, reference_summary=None):
@@ -311,7 +311,7 @@ def process_large_text_file(input_file, output_file, target_chars=10000):
         with open(input_file, 'r', encoding='utf-8') as f:
             text = f.read()
 
-        print(f"📖 Прочитан файл: {len(text)} символов")
+        #print(f"📖 Прочитан файл: {len(text)} символов")
 
         if len(text) > 150000:
             print("⚠️ Текст превышает 150,000 символов, обрезаю...")
@@ -341,7 +341,7 @@ def process_large_text_file(input_file, output_file, target_chars=10000):
         return None
 
 
-def interactive_large_text_summarizer(fileText):
+async def interactive_large_text_summarizer(fileText):
     """Интерактивный режим для работы с большими текстами"""
 #    print("🇷🇺 СУММАРИЗАТОР БОЛЬШИХ ТЕКСТОВ")
 #    print("=" * 50)
@@ -383,9 +383,9 @@ def interactive_large_text_summarizer(fileText):
         summary = summarizer.summarize_large_text(text, target_length)
         print("\n✅ РЕЗУЛЬТАТ:")
         print("—" * 50)
-        print(summary)
+       # print(summary)
 
-        return text
+        return summary
  #       print("—" * 50)
 #        print(f"📊 Сжатие: {len(text)} → {len(summary)} символов")
 
@@ -421,7 +421,7 @@ def interactive_large_text_summarizer(fileText):
             print("❌ Неверный выбор!")"""
 
 
-def main(fileTextMain):
+async def main(fileTextMain):
     """Главная функция запуска"""
     print("🇷🇺 RUSSIAN LARGE TEXT SUMMARIZATION AI")
     print("=" * 60)
@@ -436,8 +436,8 @@ def main(fileTextMain):
         print("⚡ Используется CPU")
 
     # Запуск интерактивного режима
-    interactive_large_text_summarizer(fileTextMain)
+    itgoTextFile = await interactive_large_text_summarizer(fileTextMain)
 
-
+    return itgoTextFile
 #№if __name__ == "__main__":
 #   main()

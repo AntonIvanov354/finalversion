@@ -8,7 +8,7 @@ document.getElementById("vibor-file").addEventListener("change", function(){
 
 document.addEventListener("DOMContentLoaded", async function(){
 
-url = "http://127.0.0.1:8000/abama";
+url = "http://127.0.0.1:8000/work_file";
 let Idfile = 1;
 const text_opisanie =  document.getElementById("text_opisanie");
 const text_file = document.getElementById("text_file")

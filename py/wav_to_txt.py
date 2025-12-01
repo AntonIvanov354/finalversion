@@ -57,4 +57,4 @@ async def main(FileNameBase, filePath):#, filePathFinal):
     with open(bara, "w", encoding='utf-8') as itog:
         itog.write(text)
         
-    return text
+    return bara

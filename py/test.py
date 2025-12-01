@@ -34,7 +34,7 @@ async def upload_file(file: UploadFile = File(...)):
         with open(file_location, "wb") as f:
             f.write(contents)
         
-        fileLocationFinal = str(file_location).replace(f"/{fileName}.mp3", "")
+        fileLocationFinal = Path(file_location).parent #str(file_location).replace(f"/{fileName}.mp3", " ")
         print(fileLocationFinal)
 
         print(fileName)
@@ -42,9 +42,11 @@ async def upload_file(file: UploadFile = File(...)):
         fileWav = await konvertationMp3TWav(fileName, fileLocationFinal)
         print(fileWav)
 
-        await konvertationWavTotxt(fileName, fileWav)
+        fileTxtPatrh = await konvertationWavTotxt(fileName, fileWav)
 
-        abbreviatedText = await finalWork(fileName)
+        print(Path(fileWav).name)
+
+        abbreviatedText = await finalWork(Path(fileTxtPatrh).name)
         return{
             "data":{
                 "message": "Аудио файл успешно сохранен",
