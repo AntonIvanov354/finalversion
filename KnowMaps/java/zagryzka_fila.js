@@ -47,8 +47,8 @@ document.getElementById("fileSelection").addEventListener("change", async functi
 
         let DataBaseFile = {
         id: Idfile, 
-        namefile: result.data.namefile, 
-        contentfile: result.data.contentfile
+        namefile: result.data.filename, 
+        contentfile: result.data.textFile
         };
 
 
@@ -65,11 +65,11 @@ document.getElementById("fileSelection").addEventListener("change", async functi
 
         }else{
         const result = await response.json();
-        alert(`Ошибка конвертации: ${result.status} || ${errorResult.status}`);
+        alert(`Ошибка конвертации: ${result.status} || ${result.message}`);
         
         }
     } catch(error){
-        alert("Ошибка в выводе текста на сайт!")
+        console.log("Ошибка в сетевом запросе!"+ error)
     }  
 //Нужно создавать функицю
    /** const result = await MakeRequest(url, options = {
