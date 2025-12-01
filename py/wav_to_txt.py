@@ -40,7 +40,7 @@ async def convert_large_audio_to_text(audio_file_path):
 async def main(FileNameBase, filePath):#, filePathFinal):
     fileName = FileNameBase
     filePath = filePath
-    filePathFinal = "/home/abama/Desktop/finalversion/py/itogTxt"
+    filePathFinal = "/home/abama/Desktop/finalversion/py/"
     #b = str(i)
     audio_file_path = os.path.join(filePath)#)  # Укажите путь к вашему аудиофайлу
     print(f"Обработка файла: {audio_file_path}")

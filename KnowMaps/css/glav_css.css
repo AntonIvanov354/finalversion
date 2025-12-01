@@ -1,0 +1,176 @@
+/* Основные стили для меню */
+.menu1 {
+    background-color: rgb(4, 4, 4);/* Серый цвет фона для меню */
+    color: white; /* Цвет текста в меню белый */
+    padding: 5px; /* Отступы вокруг содержимого меню */
+    display: grid; /* Используем CSS Grid для компоновки элементов */
+    grid-template-columns: repeat(6, auto); /* Создаем 6 колонок с автоматической шириной */
+    align-items: center; /* Выравнивание элементов по центру по вертикали */
+    height: 70px; /* Высота меню */
+}
+
+/* Стили для тела страницы */
+body {
+    margin: 0; /* Убираем отступы по умолчанию у body */
+    overflow: y; /* Скрываем любые полосы прокрутки */
+    background-color: rgb(4, 4, 4);
+}
+
+/* Стили для заголовка меню */
+.menu-head {
+    font-family: 'Courier New', Courier, monospace; /* Шрифт для заголовка меню */
+}
+/* Стили для пунктов меню */
+
+.KnowMap, .FAQ, .Nastr, .History, .Akkaynt {
+    font-size: 30px; /* Размер шрифта для пунктов меню */
+    text-align: center; /* Центрируем текст в пунктах меню */
+    justify-self: center; /* Выравнивание элементов по центру в сетке */
+    cursor: pointer; /* Указатель мыши при наведении на элемент */
+    transition: 1s; /* Плавный переход для эффектов при наведении */
+}
+
+/* Эффекты при наведении на пункты меню */
+.KnowMap:hover, /* Закомментированное правило для .nadpis-fail:hover */ 
+.FAQ:hover, .Nastr:hover, .History:hover, .Akkaynt:hover {
+    transform: scale(1.2); /* Увеличиваем размер элемента при наведении */
+}
+
+/* Стили для контейнера с видео и текстом */
+.opisanie {
+    position: relative; /* Относительное позиционирование для вложенных элементов */
+    width: 100%; /* Ширина на всю ширину родителя */
+    max-height: 600px; /* Максимальная высота контейнера 600px */
+    overflow: hidden; /* Скрываем переполнение контейнера */
+}
+
+/* Стили для видео внутри контейнера описания */
+.vidio {
+    position: absolute; /* Абсолютное позиционирование для видео */
+    top: 50%; /* Центрируем видео по вертикали относительно родителя */
+    left: 50%; /* Центрируем видео по горизонтали относительно родителя */
+    min-width: 100%; /* Минимальная ширина видео 100% от родителя */
+    min-height: 100%; /* Минимальная высота видео 100% от родителя */
+    width: auto; /* Автоширина для сохранения пропорций видео */
+    height: auto; /* Автовысота для сохранения пропорций видео */
+    z-index: -1; /* Размещаем видео позади текста (низкий z-index) */
+    transform: translate(-50%, -50%); /* Центрируем видео по обоим осям */
+}
+
+/* Стили для текста поверх видео */
+.text_opisanie {
+    position: absolute; /* Абсолютное позиционирование для текста поверх видео */
+    top: 30%; /* Позиционирование текста от верхней границы родителя (30% вниз) */
+    left: 50%; /* Смещение текста по горизонтали (центр) */
+    transform: translate(-50%, -50%); /* Центрируем текст по обоим осям */
+    color: white; /* Цвет текста белый для контраста с фоном видео */
+    padding: 10px; /* Отступы вокруг текста для улучшения восприятия */
+    font-size: 150%; /* Размер шрифта для текста описания */
+    text-align: left; /* Центрирование текста внутри блока описания */
+    font-family:'Courier New', Courier, monospace;
+    display: block;
+}
+/* Указание курсора по умолчанию для элемента с классом text_opisanie при наведении */
+.text_opisanie:hover {
+    cursor: default; /* Установите курсор по умолчанию */
+}
+.vibor-faila-tbl{
+    display: grid;
+    grid-template-columns: auto;
+    justify-self: center;
+}
+/* Стиль кнопки с эффектом свечения */
+.glow-on-hover {
+    width: 220px; /* Ширина кнопки */
+    height: 50px; /* Высота кнопки */
+    border: none; /* Убираем стандартную рамку */
+    outline: none; /* Убираем контур при фокусе */
+    color: #fff; /* Цвет текста */
+    background: #111; /* Фоновый цвет кнопки */
+    cursor: pointer; /* Курсор указателя при наведении */
+    position: relative; /* Позиционирование относительно родителя */
+    z-index: 0; /* Установка z-index */
+    border-radius: 10px; /* Скругление углов */
+    align-items: center;
+}
+
+/* Псевдоэлемент перед кнопкой для эффекта свечения */
+.glow-on-hover::before {
+    content: ''; /* Пустое содержимое для псевдоэлемента */
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);    
+    position: absolute; /* Абсолютное позиционирование */
+    top: -2px; /* Сдвиг вверх */
+    left: -2px; /* Сдвиг влево */
+    background-size: 400%; /* Размер фона для анимации */
+    z-index: -1; /* За кнопкой */
+    filter: blur(5px); /* Размытие фона */
+    width: calc(100% + 4px); /* Ширина с учетом сдвига */
+    height: calc(100% + 4px); /* Высота с учетом сдвига */
+    animation: glowing 20s linear infinite; /* Анимация свечения */
+    opacity: 0; /* Начальная прозрачность */
+    transition: opacity .3s ease-in-out; /* Плавный переход прозрачности */
+    border-radius: 10px; /* Скругление углов для псевдоэлемента */
+}
+
+/* Изменение цвета текста при нажатии на кнопку */
+.glow-on-hover:active {
+    color: #000; /* Цвет текста при нажатии */
+}
+
+/* Убираем фон псевдоэлемента после нажатия на кнопку (не используется) */
+.glow-on-hover:active::after {
+    background: transparent; /* Прозрачный фон для псевдоэлемента после нажатия (можно убрать если не нужно) */
+}
+
+/* Эффект свечения при наведении на кнопку */
+.glow-on-hover:hover::before {
+    opacity: 1; /* Увеличиваем непрозрачность при наведении */
+}
+
+/* Псевдоэлемент после кнопки (для возможных эффектов) */
+.glow-on-hover::after {
+    z-index: -1; /* За кнопкой */
+    content: ''; /* Пустое содержимое для псевдоэлемента */
+    position: absolute; /* Абсолютное позиционирование */
+    width: 100%; /* Ширина равна ширине кнопки */
+    height: 100%; /* Высота равна высоте кнопки */
+    background: #111; /* Фоновый цвет для псевдоэлемента */
+    left: 0; /* Выравнивание по левому краю */
+    top: 0; /* Выравнивание по верхнему краю */
+    border-radius: 10px; /* Скругление углов для псевдоэлемента */
+}
+
+/* Анимация свечения фона кнопки */
+@keyframes glowing {
+    0% { background-position: 0 0; } /* Начальная позиция фона */
+    50% { background-position: 400% 0; } /* Позиция фона в середине анимации */
+    100% { background-position: 0 0; } /* Конечная позиция фона */
+}
+.nadpis-fail{
+    color: #fff;
+    font-size: 30px; 
+    text-align: center;
+    cursor: default;
+    font-family: 'Courier New', Courier, monospace;
+}
+.main_text_file{
+    display: flex;
+    flex-direction: column;
+}
+.text_file{
+    height: 100px;
+    width: 100%;
+    height: 250px;
+    color: white;
+    text-align: 150%;
+    overflow-y: auto;
+    flex: 1;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    text-align: left;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: default;
+}

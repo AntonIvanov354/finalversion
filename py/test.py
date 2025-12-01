@@ -3,9 +3,12 @@ from fastapi.responses import JSONResponse
 import os
 from pathlib import Path
 from fastapi.middleware.cors import CORSMiddleware
+from pathlib import Path
 #import aiofiles
 from typicalRequestTxt import konvertationWavTotxt
 from typicalRequestMp3 import konvertationMp3TWav
+from bridge import finalWork
+
 app = FastAPI()
 
 app.add_middleware(
@@ -21,30 +24,32 @@ app.add_middleware(
 async def upload_file(file: UploadFile = File(...)):
     try:
         
-        upload_dir = Path("audioFileUser")
-        upload_dir.mkdir(exist_ok=True)
+       # upload_dir = Path("audioFileUser")
+       # upload_dir.mkdir(exist_ok=True)
 
-        file_location = upload_dir / file.filename
+        file_location = Path(__file__).parent / file.filename
         fileName = file.filename
 
         contents = await file.read()
         with open(file_location, "wb") as f:
             f.write(contents)
         
-        fileLocationFinal = str(file_location).replace("/a.mp3", "")
+        fileLocationFinal = str(file_location).replace(f"/{fileName}.mp3", "")
         print(fileLocationFinal)
 
         print(fileName)
         #Mp3 to wav
         fileWav = await konvertationMp3TWav(fileName, fileLocationFinal)
         print(fileWav)
-        #Wav to txt
 
+        await konvertationWavTotxt(fileName, fileWav)
+
+        abbreviatedText = await finalWork(fileName)
         return{
             "data":{
                 "message": "Аудио файл успешно сохранен",
                 "filename": file.filename,
-                "textFile": await konvertationWavTotxt(fileName, fileWav)
+                "textFile": abbreviatedText
             }
         }
     except Exception as e:

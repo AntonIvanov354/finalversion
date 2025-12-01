@@ -1,0 +1,226 @@
+/* Основные стили для меню */
+.menu1 {
+    background-color: rgb(4, 4, 4);/* Серый цвет фона для меню */
+    color: white; /* Цвет текста в меню белый */
+    padding: 5px; /* Отступы вокруг содержимого меню */
+    display: grid; /* Используем CSS Grid для компоновки элементов */
+    grid-template-columns: repeat(6, auto); /* Создаем 6 колонок с автоматической шириной */
+    align-items: center; /* Выравнивание элементов по центру по вертикали */
+    height: 70px; /* Высота меню */
+}
+
+/* Стили для тела страницы */
+body {
+    margin: 0; /* Убираем отступы по умолчанию у body */
+    overflow: y; /* Скрываем любые полосы прокрутки */
+    background-color: rgb(10, 10, 10);
+}
+
+/* Стили для заголовка меню */
+.menu-head {
+    font-family: 'Courier New', Courier, monospace; /* Шрифт для заголовка меню */
+}
+/* Стили для пунктов меню */
+
+.KnowMap, .FAQ, .Nastr, .History, .Akkaynt {
+    font-size: 30px; /* Размер шрифта для пунктов меню */
+    text-align: center; /* Центрируем текст в пунктах меню */
+    justify-self: center; /* Выравнивание элементов по центру в сетке */
+    cursor: pointer; /* Указатель мыши при наведении на элемент */
+    transition: 1s; /* Плавный переход для эффектов при наведении */
+}
+
+/* Эффекты при наведении на пункты меню */
+.KnowMap:hover, /* Закомментированное правило для .nadpis-fail:hover */ 
+.FAQ:hover, .Nastr:hover, .History:hover, .Akkaynt:hover {
+    transform: scale(1.2); /* Увеличиваем размер элемента при наведении */
+}
+.okno_reg{
+    border: 2px solid white;
+    width: 600px;
+    width: 650px;
+    height: 600px;
+    margin-top: 30px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    justify-self: center;
+}
+.okno_reg::before{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    border:350px solid transparent;
+    border-right: 350px solid rgb(255, 255, 255);
+    border-bottom: 350px solid rgb(255, 255, 255);
+    transition: all 1s;
+    transform: translateX(0);
+}
+
+.nadpis_reg{
+    display: grid;
+    grid-template-rows: 50px;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: normal;
+    margin: 0;
+    align-items: center;
+
+}
+/*.okno_reg::before{
+    content: "";
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    border-radius: 10px;
+    background-size: 400%;
+    filter: blur(5px);
+    top: -4px; Сдвиг вверх на 2 пикселя для создания эффекта обрамления 
+    left: -4px;  Сдвиг влево на 2 пикселя для создания эффекта обрамления 
+    width: calc(100% + 10px); 
+    height: calc(100% + 10px);
+    animation: glowing 20s linear infinite;
+    transition:  opacity .3s ease-in-out;
+    z-index: -1;
+}
+.okno_reg::after{
+    z-index: -1; /* За кнопкой 
+    content: ''; /* Пустое содержимое для псевдоэлемента *
+    position: absolute; /* Абсолютное позиционирование *
+    width: 100%; /* Ширина равна ширине кнопки *
+    height: 100%; /* Высота равна высоте кнопки *
+    background: #111; /* Фоновый цвет для псевдоэлемента *
+    left: 0; /* Выравнивание по левому краю *
+    top: 0; /* Выравнивание по верхнему краю *
+    border-radius: 10px; /* Скругление углов для псевдоэлемента 
+}
+@keyframes glowing {
+    0% { background-position: 0 0; } /* Начальная позиция фона 
+    50% { background-position: 400% 0; } /* Позиция фона в середине анимации *
+    100% { background-position: 0 0; } /* Конечная позиция фона *
+}
+*/
+
+/*Тут я настраиаваю таблицу, без настройки текста!!!!*/
+.napis_email_reg, .napis_password_reg, .napis_password2_reg, .napis_name_reg{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 70px;
+    width: 100%;
+    margin: 20px;
+}
+
+/*А тута я буду шаманить над текстом!*/
+.nadpis_email, .nadpis_password, .nadpis_password2, .nadpis_name{
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: left;
+    margin-left: 130px;
+}
+.nadpis_password::after{
+    content: "ь:";
+    color: black;
+}
+.nadpis_password2::after{
+    content: " ваш пароль:";
+    color: black;
+}
+
+
+/* шаман мид имба, но тут шаманим не над мидом, а над inputom)*/
+.nadpis_email_okno, .nadpis_password_okno, .nadpis_password2_okno, .nadpis_name_okno{
+    margin-left: 150px;
+    width: 250px;
+}
+/* самое сложно, кнопкааааааа а                 а а а а а аа*/
+.knopka_okno_reg{
+/*внешний вид кнопки*/
+    display: grid;
+    grid-template-columns: auto;
+    justify-self: right;
+    margin: 10px;
+    top: 40px;
+    height: 50px;
+    width: 220px;
+    align-items: center;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    font-size: 17px;
+    font-family: 'Courier New', Courier, monospace;
+    /*sos*/
+    position: relative;
+    z-index: 0;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}   
+.knopka_okno_reg::before{
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);    
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 8px);
+    height: calc(100% + 8px);
+    animation: glowing 20s linear infinite;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+.knopka_okno_reg::after{
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 10px;
+    background: #111;
+}
+.knopka_okno_reg:hover::before{
+    background:rgb(255, 0, 0);
+    transition: all 1s;
+}
+@keyframes glowing{
+    0%{background-position: 0 0;}
+    50%{background-position: 400% 0 ;}
+    100%{background-position: 0 0;}
+}
+.okno_reg_2{
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1s, visibility 1s ease;
+    position: absolute;
+}
+.okno_reg_3{
+    opacity: 0;
+    visibility: hidden;
+}
+.itog_reg_div{
+    opacity: 0;
+    visibility: hidden;
+}
+.itog_reg_div2{
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease; /* Плавный переход для opacity */
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.okno_reg_itog::before{
+    background-color: white;
+}
+.itog_reg{
+    color: rgb(0, 0, 0);
+    display: block;
+    place-items: center;
+}

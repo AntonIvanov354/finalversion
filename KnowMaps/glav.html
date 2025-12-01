@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KnowMap</title>
+    <link rel="stylesheet" href="css/glav_css.css">
+    <link rel="website icon" type="png" href="foto/logo__ved_sait.png">
+</head>
+<body>
+
+<header id="menu-head" class="menu-head">
+    <div class="menu1">
+        <p onclick="window.location.href=''" class="KnowMap">KnowMap</p>
+        <p onclick="window.location.href='/akkaynt.html'" class="Akkaynt">Аккаунт</p>
+        <p onclick="alert(`К сожеление данный раздел пока не доступен`)" class="History">История</p>
+        <p onclick="alert(`К сожеление данный раздел пока не доступен`)" class="Nastr">Настройки</p>
+        <p onclick="window.location.href=`FAQ.html`" class="FAQ">FAQ</p>
+    </div>
+   <!-- <script src="java/menu.js"></script> -->
+
+<!--    <aside>    
+        <div class="pod-head">
+            <div id="menu" class="menu" style="display: none;">
+                <ul>
+                    <li><a>1. История</a></li>
+                    <li><a>2. Настройки</a></li>
+                    <li><a>3. FAQ</a></li>
+                    <li><a>4. Главная</a></li>
+                </ul>
+            </div>
+        </div> 
+    </aside>-->
+
+</header>
+<div class="opisanie">
+    <video autoplay loop muted class="video">
+        <source src="vidio/vidio_glav.mp4" type="video/mp4">
+    </video>
+    <div class="text_opisanie" id="text_opisanie">
+        <pre>
+        KnowMap — это сайт, созданный для помощи в обучении и воспроизведении информации. На этом сайте
+        можно загрузить аудиофайл (пока только mp3). Он будет конвертирован в текст и сокращён с помощью ИИ.
+        После этого у вас будет выбор: либо скачать обычный файл с текстом лекции, 
+        либо файл с сокращённым текстом.
+        </pre>
+    </div>
+    <div class="main_text_file">
+        <pre style="display:none;" id="text_file"></pre>
+    </div>
+</div>
+
+<div class="osnova-pod-head" id="osnova-pod-head">
+    <p class="nadpis-fail">⬇ Нажмите чтоб выбрать файл с вашим audio ⬇</a>
+    <div class="vibor-faila-tbl">
+        <button class="glow-on-hover" id="fileOutput">Нажми на меня для выбора audio файла</button>
+    </div>
+   <input type="file" id="fileSelection" accept="audio/*" style="display: none;"/>
+    <script src="java/zagryzka_fila.js"></script>
+</div>
+<div id="file_link">
+
+</div>
+
+
+</body>
+</html>

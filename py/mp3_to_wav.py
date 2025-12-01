@@ -6,9 +6,10 @@ async def konvertationmp3_to_wav(file_base_name, pathFile):
     # Укажите путь к вашей папке с файлами
     path = pathFile
     file_base_name = file_base_name
+    fileBaseNameNoMp3 = file_base_name.replace(".mp3", "")
 
     input_file = os.path.join(path, f"{file_base_name}")
-    output_file = os.path.join(path, f"{file_base_name}.wav")  # Сохраним как .wav
+    output_file = os.path.join(path, f"{fileBaseNameNoMp3}.wav")  # Сохраним как .wav
 
     # Проверяем, существует ли файл
     if os.path.exists(input_file):

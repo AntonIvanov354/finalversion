@@ -1,0 +1,210 @@
+/* Основные стили для меню */
+.menu1 {
+    background-color: rgb(4, 4, 4);/* Серый цвет фона для меню */
+    color: white; /* Цвет текста в меню белый */
+    padding: 5px; /* Отступы вокруг содержимого меню */
+    display: grid; /* Используем CSS Grid для компоновки элементов */
+    grid-template-columns: repeat(6, auto); /* Создаем 6 колонок с автоматической шириной */
+    align-items: center; /* Выравнивание элементов по центру по вертикали */
+    height: 70px; /* Высота меню */
+}
+
+/* Стили для тела страницы */
+body {
+    margin: 0; /* Убираем отступы по умолчанию у body */
+    overflow: hidden; /* Скрываем любые полосы прокрутки */
+    background-color: rgb(10, 10, 10);
+}
+
+/* Стили для заголовка меню */
+.menu-head {
+    font-family: 'Courier New', Courier, monospace; /* Шрифт для заголовка меню */
+}
+/* Стили для пунктов меню */
+
+.KnowMap, .FAQ, .Nastr, .History, .Akkaynt {
+    font-size: 30px; /* Размер шрифта для пунктов меню */
+    text-align: center; /* Центрируем текст в пунктах меню */
+    justify-self: center; /* Выравнивание элементов по центру в сетке */
+    cursor: pointer; /* Указатель мыши при наведении на элемент */
+    transition: 1s; /* Плавный переход для эффектов при наведении */
+}
+
+/* Эффекты при наведении на пункты меню */
+.KnowMap:hover, /* Закомментированное правило для .nadpis-fail:hover */ 
+.FAQ:hover, .Nastr:hover, .History:hover, .Akkaynt:hover {
+    transform: scale(1.2); /* Увеличиваем размер элемента при наведении */
+}
+/* Основной контейнер для окна входа */
+.okno_vxoda_osnova {
+    display: grid; /* Используем CSS Grid для размещения элементов внутри контейнера */
+    grid-template-columns: auto; /* Определяем одну колонку, ширина которой будет автоматически подстраиваться под содержимое */
+    justify-self: center; /* Центрируем контейнер по горизонтали */
+    font-family: 'Courier New', Courier, monospace; /* Устанавливаем шрифт для текста внутри контейнера */
+    border: 2px solid white; /* Устанавливаем белую рамку шириной 2 пикселя */
+    border-radius: 10px; /* Закругляем углы рамки на 10 пикселей */
+    width: 500px; /* Устанавливаем фиксированную ширину в 500 пикселей */
+    height: 500px; /* Устанавливаем фиксированную высоту в 500 пикселей */
+    margin-top: 50px; /* Добавляем отступ сверху в 50 пикселей */
+    position: relative; /* Устанавливаем относительное позиционирование для последующих абсолютных элементов */
+    z-index: 0;
+    left: 37%;
+}
+
+/* Стили для окна входа 
+.okno_vxoda_osnova {
+    border: 2px solid white; /* Устанавливаем белую рамку шириной 2 пикселя 
+    border-radius: 10px; /* Закругляем углы рамки на 10 пикселей 
+    width: 500px; /* Устанавливаем фиксированную ширину в 500 пикселей 
+    height: 500px; /* Устанавливаем фиксированную высоту в 500 пикселей 
+    margin-top: 50px; /* Добавляем отступ сверху в 50 пикселей 
+    position: relative; /* Устанавливаем относительное позиционирование для последующих абсолютных элементов 
+    z-index: 0;
+}*/
+
+
+.nadpis_vxod_center {
+    text-align: center; /* Центрируем текст */
+    cursor: default; /* Указатель мыши не меняется при наведении */
+}
+
+.nadpis_posta_poloj, .nidpis_password_poloj {
+    display: grid; /* Используем CSS Grid для компоновки */
+    grid-template-columns: auto; /* Одна колонка с автоматической шириной */
+    text-align: left; /* Выравниваем текст по левому краю */
+    margin-left: 83px; /* Отступ слева для выравнивания */
+    cursor: default; /* Указатель мыши не меняется при наведении */
+}
+.nadpis_posta_poloj{
+    margin-left: 75px; 
+}
+/* Стили для заголовка регистрации */
+.nadpis_vxod {
+    color: rgb(0, 0, 0); /* Устанавливаем черный цвет текста */
+    font-size: 30px; /* Устанавливаем размер шрифта в 30 пикселей */
+    margin-top: 15px; /* Добавляем отступ сверху в 15 пикселей */
+}
+
+.nadpis_password {
+    color: #fff; /* Белый цвет текста для заголовка пароля */
+    font-size: 29px; /* Размер шрифта в 29 пикселей */
+}
+
+.nadpis_posta {
+    font-size: 29px; /* Размер шрифта в 29 пикселей для заголовка почты */
+}
+
+/* Псевдоэлемент для создания фона за окном входа */
+.okno_vxoda_osnova::before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    border:250px solid transparent;
+    border-left: 250px solid white;
+    border-top: 250px solid white;
+    transition: all 1s;
+    transform: translateX(0);
+}
+.okno_vxoda_osnova_itog::before{
+    background-color: white;
+}
+.okno_vxod_osnova_2{
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1s, visibility 1s ease;
+    
+}
+.okno_vxod_osnova_1{
+    opacity: 0;
+    visibility: hidden  ;
+}
+.nadpis_yspex{
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease; /* Плавный переход для opacity */
+    position: absolute;
+    display: grid;
+    grid-template-columns: auto;
+    justify-self: center;
+    top: 200px;
+}
+.nadpis_yspex2 {
+    opacity: 1;
+    visibility: visible; /* visibility будет изменяться в JavaScript */
+}
+
+.nadpis_password::before {
+    content: "Введите ва"; /* Добавляем текст "Введите" перед заголовком пароля */
+    color: rgb(0, 0, 0); /* Черный цвет текста */
+}
+
+.okno_nadpis_password, .okno_nadpis_posta {
+    display: grid; /* Используем CSS Grid для компоновки */
+    grid-template-columns: auto; /* Одна колонка с автоматической шириной */
+    justify-self: left; /* Выравнивание по левому краю в сетке */
+    height: 30px; /* Высота блока 30 пикселей */
+    width: 300px; /* Ширина блока 300 пикселей */
+    margin-left: 80px; /* Отступ слева для выравнивания */
+    margin-bottom: 20px; /* Отступ снизу для разделения блоков */
+}
+
+.knopka_potverdit_vxod {
+    width: 220px; /* Ширина кнопки 220 пикселей */
+    height: 50px; /* Высота кнопки 50 пикселей */
+    color: #fff; /* Белый цвет текста на кнопке */
+    background-color: black; /* Черный фон кнопки */
+    font-size: 20px; /* Размер шрифта на кнопке в 20 пикселей */
+    display: grid; /* Используем CSS Grid для компоновки содержимого кнопки */
+    grid-template-columns: auto; /* Одна колонка с автоматической шириной */
+    justify-self: right; /* Выравнивание по правому краю в сетке */
+    align-items: center; /* Центрируем содержимое по вертикали */
+    justify-items: center; /* Центрируем содержимое по горизонтали */
+    text-align: center; /* Центрируем текст внутри кнопки */    
+/* right: 30px; /* Сдвиг кнопки вправо на 30 пикселей (работает только если кнопка находится в сетке) */
+    top: 30px;
+    cursor: pointer; /* Указатель мыши меняется на "указатель" при наведении */
+    border-radius: 10px; /* Скругление углов кнопки на 10 пикселей */
+    position: relative; /* Относительное позиционирование для псевдоэлементов */
+    z-index: 0; /* Порядок наложения (по умолчанию) для кнопки */
+    border: none; /* Убираем стандартную рамку кнопки */
+    outline: none; /* Убираем контур при фокусе на кнопке */
+
+}
+
+.knopka_potverdit_vxod::before {
+    content: ''; /* Пустое содержимое для псевдоэлемента, который будет использоваться как фон кнопки */
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);    
+    position: absolute; /* Абсолютное позиционирование для псевдоэлемента фона */
+    top: -2px; /* Сдвиг вверх на 2 пикселя для создания эффекта обрамления */
+    left: -2px; /* Сдвиг влево на 2 пикселя для создания эффекта обрамления */
+    background-size: 400%; /* Размер фона для анимации (больше чем кнопка) */
+    z-index: -1; /* Помещаем псевдоэлемент за кнопкой (фон) */
+    filter: blur(5px); /* Применяем размытие к фону для создания эффекта свечения */
+    width: calc(100% + 4px); /* Ширина с учетом сдвига (ширина кнопки + сдвиги) */
+    height: calc(100% + 4px); /* Высота с учетом сдвига (высота кнопки + сдвиги) */
+    animation: glowing 20s linear infinite; /* Анимация свечения фона (20 секунд, бесконечно) */
+    transition: opacity .3s ease-in-out; /* Плавный переход прозрачности при наведении или изменении состояния */
+    border-radius: 10px; /* Скругление углов псевдоэлемента фона на 10 пикселей */
+}
+
+.knopka_potverdit_vxod::after {
+    z-index: -1; /* Помещаем псевдоэлемент за кнопкой (фон) */
+    content: ''; /* Пустое содержимое для псевдоэлемента фона кнопки */
+    position: absolute; /* Абсолютное позиционирование для псевдоэлемента фона кнопки */
+    width: 100%; /* Ширина равна ширине кнопки (100%) */
+    height: 100%; /* Высота равна высоте кнопки (100%) */
+    background: #111; /* Темный фон для псевдоэлемента (задний план) */
+    left: 0; /* Выравнивание по левому краю (0) */
+    top: 0; /* Выравнивание по верхнему краю (0) */
+    border-radius: 10px; /* Скругление углов псевдоэлемента фона на 10 пикселей */
+}
+
+.knopka_potverdit_vxod:hover::before {
+    background: white; /* При наведении фон кнопки становится белым (для эффекта) */
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; } /* Начальная позиция фона (0%) */
+    50% { background-position: 400% 0; } /* Позиция фона в середине анимации (50%) */
+    100% { background-position: 0 0; } /* Конечная позиция фона (100%) возвращается к началу */
+}

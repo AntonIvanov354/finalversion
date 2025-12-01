@@ -1,0 +1,59 @@
+/* Основные стили для меню */
+.menu1 {
+    background-color: rgb(4, 4, 4);/* Серый цвет фона для меню */
+    color: white; /* Цвет текста в меню белый */
+    padding: 5px; /* Отступы вокруг содержимого меню */
+    display: grid; /* Используем CSS Grid для компоновки элементов */
+    grid-template-columns: repeat(6, auto); /* Создаем 6 колонок с автоматической шириной */
+    align-items: center; /* Выравнивание элементов по центру по вертикали */
+    height: 70px; /* Высота меню */
+}
+
+/* Стили для тела страницы */
+body {
+    margin: 0; /* Убираем отступы по умолчанию у body */
+   
+    background-color: rgb(4, 4, 4);
+}
+
+/* Стили для заголовка меню */
+.menu-head {
+    font-family: 'Courier New', Courier, monospace; /* Шрифт для заголовка меню */
+}
+/* Стили для пунктов меню */
+
+.KnowMap, .FAQ, .Nastr, .History, .Akkaynt {
+    font-size: 30px; /* Размер шрифта для пунктов меню */
+    text-align: center; /* Центрируем текст в пунктах меню */
+    justify-self: center; /* Выравнивание элементов по центру в сетке */
+    cursor: pointer; /* Указатель мыши при наведении на элемент */
+    transition: 1s; /* Плавный переход для эффектов при наведении */
+}
+
+/* Эффекты при наведении на пункты меню */
+.KnowMap:hover, /* Закомментированное правило для .nadpis-fail:hover */ 
+.FAQ:hover, .Nastr:hover, .History:hover, .Akkaynt:hover {
+    transform: scale(1.2); /* Увеличиваем размер элемента при наведении */
+}
+
+/* Стили для кнопок в меню */
+.menu-knopka {
+    justify-self: right; /* Выравнивание кнопки вправо в сетке */
+    background-color: black; /* Черный фон кнопки */
+    color: #808080; /* Цвет текста кнопки серый */
+    font-size: 18px; /* Размер шрифта для кнопки */
+    cursor: pointer; /* Указатель мыши при наведении на кнопку */
+    border: 2px solid #808080; /* Серый бордер вокруг кнопки */
+    border-radius: 5px; /* Закругление углов кнопки */
+}
+/*работа с аватаркой*/
+.avatar img{
+    width: 100px;
+    height: 100px;
+    margin-left: 500px;
+    margin-top: 150px;
+    opacity: 1;
+}
+.avatar{
+    opacity: 1;
+}
