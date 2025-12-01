@@ -11,10 +11,10 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Разрешаем все домены (для разработки)
+    allow_origins=["*"],  # ← СПИСОК и только домен:порт
     allow_credentials=True,
-    allow_methods=["*"],  # Разрешаем все методы
-    allow_headers=["*"],  # Разрешаем все заголовки
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 #file_path = '/home/abama/Documents/konvertationfile/konvertationfile/audioFileUser/py'
 
@@ -31,17 +31,21 @@ async def upload_file(file: UploadFile = File(...)):
         contents = await file.read()
         with open(file_location, "wb") as f:
             f.write(contents)
+        
+        fileLocationFinal = str(file_location).replace("/a.mp3", "")
+        print(fileLocationFinal)
+
         print(fileName)
         #Mp3 to wav
-        await konvertationMp3TWav(fileName, file_location)
-
+        fileWav = await konvertationMp3TWav(fileName, fileLocationFinal)
+        print(fileWav)
         #Wav to txt
 
         return{
             "data":{
                 "message": "Аудио файл успешно сохранен",
                 "filename": file.filename,
-                "textFile": await konvertationWavTotxt(fileName, file_location)
+                "textFile": await konvertationWavTotxt(fileName, fileWav)
             }
         }
     except Exception as e:
