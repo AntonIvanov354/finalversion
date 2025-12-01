@@ -47,6 +47,7 @@ async def upload_file(file: UploadFile = File(...)):
         print(Path(fileWav).name)
 
         abbreviatedText = await finalWork(Path(fileTxtPatrh).name)
+        
         return{
             "data":{
                 "message": "Аудио файл успешно сохранен",
