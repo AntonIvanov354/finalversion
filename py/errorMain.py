@@ -340,25 +340,33 @@ def process_large_text_file(input_file, output_file, target_chars=10000):
         return None
 
 
-def interactive_large_text_summarizer():
+def interactive_large_text_summarizer():#fileNameBase, fileName):
     """Интерактивный режим для работы с большими текстами"""
-    print("🇷🇺 СУММАРИЗАТОР БОЛЬШИХ ТЕКСТОВ")
-    print("=" * 50)
+#    print("🇷🇺 СУММАРИЗАТОР БОЛЬШИХ ТЕКСТОВ")
+ #   print("=" * 50)
 
     summarizer = RussianTextSummarizer()
     summarizer.load_model()
 
     while True:
-        print("\n" + "=" * 50)
-        print("1 📝 Ввести текст вручную")
-        print("2 📁 Обработать текстовый файл")
-        print("3 🚪 Выход")
-        print("=" * 50)
+  #      print("\n" + "=" * 50)
+   #     print("1 📝 Ввести текст вручную")
+    #    print("2 📁 Обработать текстовый файл")
+     #   print("3 🚪 Выход")
+      #  print("=" * 50)
+        filename = "/home/abama/Pictures/finalversion/py/txt/file.txt"
 
-        choice = input("Выберите действие (1-3): ").strip()
+        if not filename:
+            filename = filename + ".txt"
 
-        if choice == "1":
-            print("\n📝 Введите текст (поддерживается до 150,000 символов):")
+        output_file = filename.replace('.txt', '_summary.txt')
+
+        if process_large_text_file(filename, output_file):
+            print(f"🎉 Файл обработан успешно!")
+        else:
+            print("❌ Ошибка обработки файла")
+""" if choice == "1":
+            print("📝 Введите текст (поддерживается до 150,000 символов):")
             print("(введите 'КОНЕЦ' на отдельной строке для завершения)")
 
             lines = []
@@ -375,21 +383,21 @@ def interactive_large_text_summarizer():
                     print("⚠️ Достигнут лимит в 150,000 символов")
                     break
 
-            text = "\n".join(lines)
+            text = "".join(lines)
 
             if text:
                 print(f"📊 Текст получен: {len(text)} символов")
                 target_length = min(10000, len(text) // 15)  # Целевая длина ~6.7% от оригинала
 
                 summary = summarizer.summarize_large_text(text, target_length)
-                print("\n✅ РЕЗУЛЬТАТ:")
+                print("✅ РЕЗУЛЬТАТ:")
                 print("—" * 50)
                 print(summary)
                 print("—" * 50)
                 print(f"📊 Сжатие: {len(text)} → {len(summary)} символов")
 
                 # Сохранение
-                save = input("\n💾 Сохранить результат? (y/n): ").lower()
+                save = input("💾 Сохранить результат? (y/n): ").lower()
                 if save == 'y':
                     filename = input("Имя файла (без .txt): ").strip()
                     if not filename:
@@ -399,28 +407,18 @@ def interactive_large_text_summarizer():
                         f.write(summary)
                     print(f"✅ Сохранено в {filename}.txt")
             else:
-                print("❌ Текст не введен!")
+                print("❌ Текст не введен!"
 
         elif choice == "2":
-            filename = input("Введите имя файла: ").strip()
-            if not filename:
-                filename = "text.txt"
-
-            output_file = filename.replace('.txt', '_summary.txt')
-
-            if process_large_text_file(filename, output_file):
-                print(f"🎉 Файл обработан успешно!")
-            else:
-                print("❌ Ошибка обработки файла")
 
         elif choice == "3":
             print("👋 До свидания!")
             break
         else:
-            print("❌ Неверный выбор!")
+            print("❌ Неверный выбор!")"""
 
 
-def main():
+def main():#fileNameBase, fileName):
     """Главная функция запуска"""
     print("🇷🇺 RUSSIAN LARGE TEXT SUMMARIZATION AI")
     print("=" * 60)
@@ -435,8 +433,5 @@ def main():
         print("⚡ Используется CPU")
 
     # Запуск интерактивного режима
-    interactive_large_text_summarizer()
-
-
-if __name__ == "__main__":
-    main()
+    interactive_large_text_summarizer()#fileNameBase, fileName)
+main()
