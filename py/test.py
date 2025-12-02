@@ -1,5 +1,5 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
-from fastapi.responses import JSONResponse
+#from fastapi.responses import JSONResponse
 import os
 from pathlib import Path
 from fastapi.middleware.cors import CORSMiddleware
@@ -20,7 +20,7 @@ app.add_middleware(
 )
 #file_path = '/home/abama/Documents/konvertationfile/konvertationfile/audioFileUser/py'
 
-@app.post("/work_file")
+@app.post("/work")
 async def upload_file(file: UploadFile = File(...)):
     try:
         
@@ -47,18 +47,28 @@ async def upload_file(file: UploadFile = File(...)):
         print(Path(fileWav).name)
 
         abbreviatedText = await finalWork(Path(fileTxtPatrh).name)
-        
+
         return{
             "data":{
                 "message": "Аудио файл успешно сохранен",
-                "filename": file.filename,
+                "filename": fileName,
                 "textFile": abbreviatedText
             }
         }
-    except Exception as e:
-        return JSONResponse(
-            status_code=500,
-            content={
-                "message": f"Ошибка при сохранении аудио файла: {str(e)}"
+    
+    except:
+        return {
+            'data':{
+                "message": "Ошибка при сохранении аудио файла!"
             }
-        )
+        }
+    
+@app.post("/a")
+def a():
+            return{
+            "data":{
+                "message": "Аудио файл успешно сохранен",
+                "filename":'aa',
+                "textFile": 'jj'
+            }
+        }

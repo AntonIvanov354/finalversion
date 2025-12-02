@@ -8,10 +8,10 @@ document.getElementById("vibor-file").addEventListener("change", function(){
 
 document.addEventListener("DOMContentLoaded", async function(){
 
-url = "http://127.0.0.1:8000/work_file";
+url = "http://127.0.0.1:8000/work";
 let Idfile = 1;
 const text_opisanie =  document.getElementById("text_opisanie");
-const text_file = document.getElementById("text_file")
+//const text_file = document.getElementById("text_file")
 
 document.getElementById("fileOutput").addEventListener("click", function(){
 
@@ -20,13 +20,13 @@ document.getElementById("fileOutput").addEventListener("click", function(){
 document.getElementById("fileSelection").addEventListener("change", async function(){
     const TheFileItself = document.getElementById("fileSelection")
     const File = TheFileItself.files[0]
-    const namefile = this.files[0].name
+//    const namefile = this.files[0].name
 
     if(!File){
         alert ("Вы не выбрали файл!");
         return;
     } 
-    Idfile += 1
+    Idfile = 1
 
     const formData = new FormData();
 
@@ -36,34 +36,41 @@ document.getElementById("fileSelection").addEventListener("change", async functi
 
     const text_file = document.getElementById("text_file");
     try{
+    //    console.log('f') <-- это выводит
+
         const response = await fetch(url, {
         method: "POST",
         body: formData
 
         });
-        if(response.ok){
-        const result = await response.json();
-        console.log("ответ сервера: ", result )
 
-        let DataBaseFile = {
-        id: Idfile, 
-        namefile: result.data.filename, 
-        contentfile: result.data.textFile
-        };
+        if(Idfile == 1){
+            const result = await response.json(); //<-- после этого не работает, ошибка тут хз че тут не так
 
+            console.log('gg')
 
-        const file_content =  document.createElement("pre");
-        file_content.textContent = DataBaseFile.contentfile;
+            console.log("ответ сервера: ", result )
 
-        file_content.classList.add("text_file");
-        
-        text_opisanie.innerHTML = '';
-        text_file.appendChild(file_content);
+            let DataBaseFile = {
+            id: Idfile, 
+            namefile: result.data.filename, 
+            contentfile: result.data.textFile
+            };
 
-        text_opisanie.style.display = "none";
-        text_file.style.display = "block";     
+            alert(DataBaseFile.contentfile)
 
-        }else{
+            const file_content =  document.createElement("pre");
+            file_content.textContent = DataBaseFile.contentfile;
+
+            file_content.classList.add("text_file");
+            
+            text_opisanie.innerHTML = '';
+            text_file.appendChild(file_content);
+
+            text_opisanie.style.display = "none";
+            text_file.style.display = "block";     
+
+       }else{
         const result = await response.json();
         alert(`Ошибка конвертации: ${result.status} || ${result.message}`);
         
