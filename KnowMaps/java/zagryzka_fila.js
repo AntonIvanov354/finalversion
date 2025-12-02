@@ -8,76 +8,85 @@ document.getElementById("vibor-file").addEventListener("change", function(){
 
 document.addEventListener("DOMContentLoaded", async function(){
 
-url = "http://127.0.0.1:8000/work";
-let Idfile = 1;
-const text_opisanie =  document.getElementById("text_opisanie");
-//const text_file = document.getElementById("text_file")
+    url = "http://127.0.0.1:8000/work";
+    //let Idfile = 1;
+    //const text_opisanie =  document.getElementById("text_opisanie");
+    //const text_file = document.getElementById("text_file")
 
-document.getElementById("fileOutput").addEventListener("click", function(){
+    document.getElementById("fileOutput").addEventListener("click", function(eventOne){
+        eventOne.preventDefault();
+        document.getElementById("fileSelection").click();
+    });
+    document.getElementById("fileSelection").addEventListener("change", async function(eventTwo){
+        //eventOne.stopImmediatePropagation();
+        const TheFileItself = document.getElementById("fileSelection")
+        const File = TheFileItself.files[0];
+        const namefile = this.files[0].name
 
-    document.getElementById("fileSelection").click();
-});
-document.getElementById("fileSelection").addEventListener("change", async function(){
-    const TheFileItself = document.getElementById("fileSelection")
-    const File = TheFileItself.files[0]
-//    const namefile = this.files[0].name
+        if(!File){
+            alert ("Вы не выбрали файл!");
+            return;
+        } 
+        //Idfile = 1
 
-    if(!File){
-        alert ("Вы не выбрали файл!");
-        return;
-    } 
-    Idfile = 1
+        const formData = new FormData();
 
-    const formData = new FormData();
+        formData.append("file", File);
+        formData.append("description", `Загрузочный файл`);//${Idfile}`);
+        formData.append("Category", "audio");
 
-    formData.append("file", File);
-    formData.append("description", `Загрузочный файл номер: ${Idfile}`);
-    formData.append("Category", "audio");
+        if(formData){
+            console.log(`Файл успешно загружен в FromData: ${namefile}`)
+        // const text_file = document.getElementById("text_file");
+            try{
+            //    console.log('f') <-- это выводит
+                console.log('Начинаю отправку файла на сервер!'); 
 
-    const text_file = document.getElementById("text_file");
-    try{
-    //    console.log('f') <-- это выводит
+                const response = await fetch(url, {
+                method: "POST",
+                body: formData
 
-        const response = await fetch(url, {
-        method: "POST",
-        body: formData
+                });
+        //        event.preventDefault();
+                if(response.ok){
+                    const result = await response.json(); //<-- после этого не работает, ошибка тут хз че тут не так
 
-        });
+                    console.log(`Сервер дал успешный ответ: ${result.message}`);
+                    console.log(`Начинаю загрузку и обработку файла: ${filename}`);
 
-        if(Idfile == 1){
-            const result = await response.json(); //<-- после этого не работает, ошибка тут хз че тут не так
+                    let DataBaseFile = {
+                    //id: Idfile, 
+                        namefile: result.data?.filename ?? 'Неизвестно, nameFile', 
+                        contentfile: result.data?.textFile ?? 'Пустой ответ, contentFile'
+                    };
+                    
+                    console.log(`Имя файла: ${DataBaseFile.namefile}`)
+                    console.log(`Содержимое файла: ${DataBaseFile.contentfile}`)
+                /** const file_content =  document.createElement("pre");
+                    file_content.textContent = DataBaseFile.contentfile;
 
-            console.log('gg')
+                    file_content.classList.add("text_file");
+                    
+                    text_opisanie.innerHTML = '';
+                    text_file.appendChild(file_content);
 
-            console.log("ответ сервера: ", result )
+                    text_opisanie.style.display = "none";
+                    text_file.style.display = "block";      */
+                    
+                }else{
+                    const result = await response.json();
+                    console.error(`Ошибка конвертации: ${result.status} || ${result.message}`);
+                    
+                    }
+                } catch(error){
+                    console.log("Ошибка!"+ error);
+                }
 
-            let DataBaseFile = {
-            id: Idfile, 
-            namefile: result.data.filename, 
-            contentfile: result.data.textFile
-            };
+    }if(!formData){
+        console.error(`Ошибка в загрузке файла в FormData: ${namefile}`);
+        return
+    }
 
-            alert(DataBaseFile.contentfile)
-
-            const file_content =  document.createElement("pre");
-            file_content.textContent = DataBaseFile.contentfile;
-
-            file_content.classList.add("text_file");
-            
-            text_opisanie.innerHTML = '';
-            text_file.appendChild(file_content);
-
-            text_opisanie.style.display = "none";
-            text_file.style.display = "block";     
-
-       }else{
-        const result = await response.json();
-        alert(`Ошибка конвертации: ${result.status} || ${result.message}`);
-        
-        }
-    } catch(error){
-        console.log("Ошибка в сетевом запросе!"+ error)
-    }  
 //Нужно создавать функицю
    /** const result = await MakeRequest(url, options = {
         method: "POST", 

@@ -21,11 +21,12 @@ app.add_middleware(
 #file_path = '/home/abama/Documents/konvertationfile/konvertationfile/audioFileUser/py'
 
 @app.post("/work")
-async def upload_file(file: UploadFile = File(...)):
+async def upload_file(file: UploadFile = File(...)):#Ошибка найдена, она тут. Ток хз в чем(
+
     try:
         
-       # upload_dir = Path("audioFileUser")
-       # upload_dir.mkdir(exist_ok=True)
+        #upload_dir = Path("audioFileUser")
+        #upload_dir.mkdir(exist_ok=True)
 
         file_location = Path(__file__).parent / file.filename
         fileName = file.filename
@@ -35,34 +36,36 @@ async def upload_file(file: UploadFile = File(...)):
             f.write(contents)
         
         fileLocationFinal = Path(file_location).parent #str(file_location).replace(f"/{fileName}.mp3", " ")
-        print(fileLocationFinal)
+        print(f'Пусть к файлу: {fileLocationFinal}')
 
-        print(fileName)
+        print(f'Название файла: {fileName}')
         #Mp3 to wav
-        fileWav = await konvertationMp3TWav(fileName, fileLocationFinal)
-        print(fileWav)
-
-        fileTxtPatrh = await konvertationWavTotxt(fileName, fileWav)
-
-        print(Path(fileWav).name)
-
-        abbreviatedText = await finalWork(Path(fileTxtPatrh).name)
+       # fileWav = await konvertationMp3TWav(fileName, fileLocationFinal)
+       # print(fileWav)
+#
+       # fileTxtPatrh = await konvertationWavTotxt(fileName, fileWav)
+#
+       # print(Path(fileWav).name)
+#
+       # abbreviatedText = await finalWork(Path(fileTxtPatrh).name)
 
         return{
             "data":{
                 "message": "Аудио файл успешно сохранен",
-                "filename": fileName,
-                "textFile": abbreviatedText
+                "filename": 'fileName',
+                "textFile": 'abbreviatedText'
             }
         }
     
-    except:
+    except Exception as e:
+        print(f"Error: {e}")
         return {
             'data':{
-                "message": "Ошибка при сохранении аудио файла!"
+                "message": f"Ошибка при сохранении аудио файла!, {e}"
+                
             }
         }
-    
+            
 @app.post("/a")
 def a():
             return{
