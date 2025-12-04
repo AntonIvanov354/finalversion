@@ -8,7 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import aiofiles
 #from pathlib import Path
 import os
-import sys#Импорт всех файлов дла конвертации:
+#import sys
+#Импорт всех файлов дла конвертации:
 from typicalRequestTxt import konvertationWavTotxt
 from typicalRequestMp3 import konvertationMp3TWav
 from bridge import finalWork
@@ -32,7 +33,7 @@ async def upload_file(file: UploadFile, access_token: str | None = Cookie(defaul
             raise HTTPException(status_code=400, detail="Неподдерживаемый формат файла")
 
         filename = file.filename
-        filePath = os.getcwd()
+        file_path = os.getcwd()
 
         async with aiofiles.open(filename, "wb") as f:
             data = await file.read()
@@ -42,22 +43,22 @@ async def upload_file(file: UploadFile, access_token: str | None = Cookie(defaul
 
         #Шаг 1: Конвертация из mp3 в wav.
         print(f"Step number one, path file mp3: {filename}")
-        konvertationToWav = await konvertationMp3TWav(filename, filePath)#тут ошибка, дальше не идет
-        print(f"conversion result to wav, name file: {konvertationToWav}")
+        mp3_to_wav = await konvertationMp3TWav(filename, file_path)
+        print(f"conversion result to wav, name file: {mp3_to_wav}")
 
         #Шаг 2: Конвертация из wav в txt.
-        konvertationToTxt = await konvertationWavTotxt(filename, konvertationToWav)
-        print(f"conversion result to txt, name file: {konvertationToTxt}")
+        wav_to_txt = await konvertationWavTotxt(filename, mp3_to_wav)
+        print(f"conversion result to txt, name file: {wav_to_txt}")
 
         #Шаг 3: Сокращение текст из файла txt.
-        textReduction = await finalWork(konvertationToTxt)
-        print(f"final veriosn txt: {textReduction}")
+        final_step = await finalWork(wav_to_txt)
+        print(f"final veriosn txt: {final_step}")
 
         return{
             "message": "Успешно!",
             #"data":{
             #"filename": 'filename',
-            "textFile": textReduction
+            "textFile": final_step
             #}
         }
 
