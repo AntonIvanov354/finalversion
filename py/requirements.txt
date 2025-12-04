@@ -1,10 +1,11 @@
 pydub
 SpeechRecognition
-fastapi
+fastapi[all]
 python-multipart
 uvicorn
 aiofiles
 torch
+sqlalchemy
 transformers>=4.30.0
 datasets>=2.12.0
 rouge-score>=0.1.2

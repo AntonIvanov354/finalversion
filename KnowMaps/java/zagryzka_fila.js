@@ -8,7 +8,7 @@ document.getElementById("vibor-file").addEventListener("change", function(){
 
 document.addEventListener("DOMContentLoaded", async function(){
 
-    url = "http://127.0.0.1:8000/work";
+    url = "http://127.0.0.1:8000/uploadfile";
     //let Idfile = 1;
     //const text_opisanie =  document.getElementById("text_opisanie");
     //const text_file = document.getElementById("text_file")
@@ -52,18 +52,17 @@ document.addEventListener("DOMContentLoaded", async function(){
                     const result = await response.json(); //<-- после этого не работает, ошибка тут хз че тут не так
 
                     console.log(`Сервер дал успешный ответ: ${result.message}`);
-                    console.log(`Начинаю загрузку и обработку файла: ${filename}`);
+                    //console.log(`Начинаю загрузку и обработку файла: ${filename}`);
 
-                    let DataBaseFile = {
-                    //id: Idfile, 
-                        namefile: result.data?.filename ?? 'Неизвестно, nameFile', 
-                        contentfile: result.data?.textFile ?? 'Пустой ответ, contentFile'
-                    };
+                    let contentfile = result.textFile
+                  //  //id: Idfile, 
+                  //    namefile: result.filename, 
+                    //};
                     
-                    console.log(`Имя файла: ${DataBaseFile.namefile}`)
-                    console.log(`Содержимое файла: ${DataBaseFile.contentfile}`)
-                /** const file_content =  document.createElement("pre");
-                    file_content.textContent = DataBaseFile.contentfile;
+                    //console.log(`Имя файла: ${result.filename}`)
+                    console.log(`Содержимое файла: ${contentfile}`)
+                    const file_content =  document.createElement("pre");
+                    file_content.textContent = contentfile;
 
                     file_content.classList.add("text_file");
                     
@@ -71,7 +70,7 @@ document.addEventListener("DOMContentLoaded", async function(){
                     text_file.appendChild(file_content);
 
                     text_opisanie.style.display = "none";
-                    text_file.style.display = "block";      */
+                    text_file.style.display = "block";      
                     
                 }else{
                     const result = await response.json();
@@ -79,11 +78,12 @@ document.addEventListener("DOMContentLoaded", async function(){
                     
                     }
                 } catch(error){
-                    console.log("Ошибка!"+ error);
+                    console.error("Ошибка!"+ error);
                 }
 
     }if(!formData){
         console.error(`Ошибка в загрузке файла в FormData: ${namefile}`);
+        window.location.reload()
         return
     }
 
