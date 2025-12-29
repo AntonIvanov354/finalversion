@@ -1,4 +1,4 @@
-import speech_recognition as sr
+#import speech_recognition as sr
 from pydub import AudioSegment
 import os
 
@@ -14,7 +14,7 @@ async def konvertationmp3_to_wav(file_base_name, pathFile):
     # Проверяем, существует ли файл
     if os.path.exists(input_file):
         # Загрузка звукового файла в формате MP3
-        audio_mp3 = AudioSegment.from_file(input_file, format="mp3", ffmpeg="\\home\\abama\\Desktop\\ffmpeg-8.0.1\\compat")
+        audio_mp3 = AudioSegment.from_file(input_file, format="mp3", ffmpeg="\\app\\ffmpeg-8.0.1")
         
         # Конвертация в формат WAV
         audio_mp3.export(output_file, format="wav")

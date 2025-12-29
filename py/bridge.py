@@ -6,7 +6,7 @@ async def finalWork(fileName):#filePath,
             textFile = file.read()
             
         itogText = await main(textFile)
-        print(itogText)
+        #print(itogText)
 
     except Exception as e:
         print(f'Error: {e}')

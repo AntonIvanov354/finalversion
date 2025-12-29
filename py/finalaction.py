@@ -19,11 +19,11 @@ from transformers import (
     pipeline
 )
 from datasets import load_dataset
-import numpy as np
+#import numpy as np
 from rouge_score import rouge_scorer
 import nltk
-from flask import Flask, request, jsonify
-import pandas as pd
+#from flask import Flask, request, jsonify
+#import pandas as pd
 import warnings
 import re
 
