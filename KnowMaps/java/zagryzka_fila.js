@@ -7,138 +7,116 @@ document.getElementById("vibor-file").addEventListener("change", function(){
     alert('Выбранный файл: ' + fileName);*/
 
 document.addEventListener("DOMContentLoaded", async function(){
-
-    url = "http://127.0.0.1:8000/uploadfile";
-    //let Idfile = 1;
-    //const text_opisanie =  document.getElementById("text_opisanie");
-    //const text_file = document.getElementById("text_file")
-
-    document.getElementById("fileOutput").addEventListener("click", function(eventOne){
-        eventOne.preventDefault();
+    //проверка работы сервера
+    const urlChekServer = "http://127.0.0.1:8000/checkserver";
+    //загрузка файла
+    const urlLoadingFile = "http://127.0.0.1:8000/uploadfile";
+    const functionCheckServer = async (urlChekServer) => 
+    {
+        try
+            {
+                const checkServer = await fetch(urlChekServer, {
+                method: 'GET',
+                headers: {
+                    'Content-Type':'application/json',
+                    'Accept':'application/json'
+                        }
+                });
+                if(!checkServer.ok){
+                    throw new Error (`Ошибка! Сервер не доступен для запросов! ${checkServer.status}, ${checkServer.statusText}`);
+                }else{
+                    try{
+                        let result = await checkServer.json();
+                        console.log(`Сервер готов к работае: ${result.message}`);
+                        return result.message;
+                    }catch(jsonError){
+                        throw new Error (`Ошибка в обработке ответа сервера! ${jsonError}`);
+                    }
+                }
+                
+            }
+        catch(error){
+            throw new Error (`Ошибка! ${error}`);
+        }
+    } 
+    document.getElementById("fileOutput").addEventListener("click", function(){
+        //eventOne.preventDefault();
         document.getElementById("fileSelection").click();
     });
     document.getElementById("fileSelection").addEventListener("change", async function(eventTwo){
-        //eventOne.stopImmediatePropagation();
+        //Считывание файла
         const TheFileItself = document.getElementById("fileSelection")
         const File = TheFileItself.files[0];
-        const namefile = this.files[0].name
+        const namefile = this.files[0]
 
         if(!File){
             alert ("Вы не выбрали файл!");
             return;
         } 
-        //Idfile = 1
-
+        //обработка файла
         const formData = new FormData();
 
         formData.append("file", File);
-        formData.append("description", `Загрузочный файл`);//${Idfile}`);
+        formData.append("description", `Загрузочный файл`);
         formData.append("Category", "audio");
 
         if(formData){
-            console.log(`Файл успешно загружен в FromData: ${namefile}`)
-        // const text_file = document.getElementById("text_file");
-            try{
-            //    console.log('f') <-- это выводит
-                console.log('Начинаю отправку файла на сервер!'); 
+            const finalStepCheck = await(functionCheckServer(urlChekServer));
 
-                const response = await fetch(url, {
-                method: "POST",
-                body: formData
+            if(finalStepCheck === 'True') 
+            {
+                console.log(`Файл успешно загружен в FromData: ${namefile}`);
 
-                });
-        //        event.preventDefault();
-                if(response.ok){
-                    const result = await response.json(); //<-- после этого не работает, ошибка тут хз че тут не так
+                try{
 
-                    console.log(`Сервер дал успешный ответ: ${result.message}`);
-                    //console.log(`Начинаю загрузку и обработку файла: ${filename}`);
+                    console.log('Начинаю отправку файла на сервер!'); 
 
-                    let contentfile = result.textFile
-                  //  //id: Idfile, 
-                  //    namefile: result.filename, 
-                    //};
-                    
-                    //console.log(`Имя файла: ${result.filename}`)
-                    console.log(`Содержимое файла: ${contentfile}`)
-                    const file_content =  document.createElement("pre");
-                    file_content.textContent = contentfile;
+                    const response = await fetch(urlLoadingFile, {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "Accept": "application/json"
+                    },
+                    });
+                    if(response.ok){
+                        // Сетевой запрос с обработкой ответа
+                        const result = await response.json();
 
-                    file_content.classList.add("text_file");
-                    
-                    text_opisanie.innerHTML = '';
-                    text_file.appendChild(file_content);
+                        console.log(`Сервер дал успешный ответ: ${result.message}`);
 
-                    text_opisanie.style.display = "none";
-                    text_file.style.display = "block";      
-                    
-                }else{
-                    const result = await response.json();
-                    console.error(`Ошибка конвертации: ${result.status} || ${result.message}`);
-                    
+
+                        let contentfile = result.textFile
+                        
+                        //Вывод на страницу текста из файла
+                        console.log(`Содержимое файла: ${contentfile}`)
+                        const file_content =  document.createElement("a");
+                        file_content.textContent = contentfile;
+
+                        file_content.classList.add("text_file");
+                        
+                        text_opisanie.innerHTML = '';
+                        text_file.appendChild(file_content);
+
+                        text_opisanie.style.display = "none";
+                        text_file.style.display = "block";      
+                        
+                    }else{
+                        const result = await response.json();
+                        console.error(`Ошибка конвертации: ${result.status} || ${result.message}`);
+                    // window.location.reload();
+                        
+                        }
+                    } catch(jsonError){
+                    console.error(`Ошибка в сетевом запросе: ${jsonError}`);
+                    // window.location.reload();
                     }
-                } catch(error){
-                    console.error("Ошибка!"+ error);
-                }
-
-    }if(!formData){
-        console.error(`Ошибка в загрузке файла в FormData: ${namefile}`);
-        window.location.reload()
-        return
-    }
-
-//Нужно создавать функицю
-   /** const result = await MakeRequest(url, options = {
-        method: "POST", 
-        body: formData
-    }); */
-    //async function SendingFile(url, options) {
-        //const defaultOptions = await fetch (url, {
-          //  method: "POST",
-            //body: FileSending
-       // })
-    //}
-
-   // try{
-     //   const OtvetServer = SendingFile{url, options{
-
-       // }} 
-    /** Крч код правильный 50 на 50, но и одновремено не правильный вообще. крч иди нахуй сиди думай
-       // const itog = await SendingAFile(url)
-        alert("A")
-        //if(itog.success){
-        const ListContainer = document.getElementById("file_link")
-
-        DataBaseFile.forEache(DataBaseFile => {
-            const FileList = document.createElement("a");
-
-            FileList.href = `glav/${DataBaseFile.id}`;
-
-            FileList.textContent = `Перейти к айдио файлу: ${DataBaseFile.namefile}`;
-
-            const fileItem = document.createElement("div");
-            fileItem.className = `file-item`;
-
-            fileItem.append(FileList);
-            ListContainer.appendChild(fileItem)
-
-        }) 
-        //}
-    
-    catch(error){
-        alert("ошибка")
-    } */
-    /**else{
-        const response = await SendingTheFileToTheServer(url)
-        обязательно сделать проверка ответа сервера, не буду пихать это 
-         * в функицю т.к. не рационально нагружать её, проще пихнуть её сюда, 
-         * сделать все в одном месте 
-        if(response.success){
-            Добавить переход нв другую страницу, завтра буду делать. 
-        }else{
-            Вывод окна ошибки, обязательно 
-        }
-    }
- *///}
+            }else{
+                alert(`На данный момент сервер недоступен, попробуйте позже!`)
+            }
+        }else if(!formData){
+            console.error(`Ошибка в загрузке файла! ${formData}`);
+            // window.location.reload();
+            return
+        };
     });
 });

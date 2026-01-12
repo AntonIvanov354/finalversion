@@ -23,7 +23,7 @@ body {
 /* Стили для пунктов меню */
 
 .KnowMap, .FAQ, .Nastr, .History, .Akkaynt {
-    font-size: 30px; /* Размер шрифта для пунктов меню */
+    font-size: clamp(0.75em, 0.25em + 2vw, 15rem);; /* Размер шрифта для пунктов меню */
     text-align: center; /* Центрируем текст в пунктах меню */
     justify-self: center; /* Выравнивание элементов по центру в сетке */
     cursor: pointer; /* Указатель мыши при наведении на элемент */

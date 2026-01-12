@@ -1,18 +1,84 @@
 document.addEventListener("DOMContentLoaded",  async function() {
 
-    const url = "http://127.0.0.1:8000/api/users"
-    const printIdCooki = JSON.parse(localStorage.getItem("idcooki") || `{"id": null}`)
+   // const url = "http://127.0.0.1:8000/cooki/{user}"
+    //const printIdCooki = JSON.parse(localStorage.getItem("idcooki") || `{"id": null}`)
 
     const knopka_potverdit_vxod = document.getElementById("knopka_potverdit_vxod");
     const okno_vxoda_osnova = document.getElementById("okno_vxoda_osnova");
     const okno_vxod_osnova_2 = document.getElementById("okno_vxod_osnova_2");
     const nadpis_yspex2 = document.getElementById("nadpis_yspex");
 
-    knopka_potverdit_vxod.addEventListener("click", async function() {
-/*        okno_vxoda_osnova.classList.toggle("okno_vxoda_osnova_itog");
-        okno_vxod_osnova_2.classList.toggle("okno_vxod_osnova_1")
-        nadpis_yspex2.classList.toggle("nadpis_yspex2")*/
+    //Универсальный(наверное) код на отправку данных и получения cookie пользователя
+    /*const cookieCheck = async (url, option = {}) => {
+        const defauOptionsrequset = {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+                "Accept": "application/json"
+            },
+        };  
+        const requestBody = {
+            ...defauOptionsrequset,
+            ...option, 
+            headers: {
+                ...defauOptionsrequset.headers,
+                ...option.headers
+            },
+        };
 
+        try{
+            const requestToTheServer = await fetch(url, requestBody);
+            if(!requestToTheServer.ok){
+                throw new Error(`Запрос на проверку cooki не удался, сервер не отвечает: ${requestToTheServer.status}!`);
+            }try{
+                const resultRequest = await requestToTheServer.json();
+                const cookie = data.cookie
+                return cookie;
+            }catch(jsonError){
+                throw new Error(`Ошибка в обьработке ответа сервера: ${jsonError}!`);
+            }
+        }catch(error){
+            throw new Error(`Ошибка: ${error}!`);
+        } 
+    }
+*/
+    knopka_potverdit_vxod.addEventListener("click", async function() {
+
+    //Сама отправка и получение файлов cookie
+    
+        const userName = await document.getElementById("window_title_email").value;
+        const userPassword = await document.getElementById("window_title_password").value;
+
+        if(!userName || !userPassword){
+            alert("Заполните все поля!");
+            return;
+        }//try{
+            let UserData = {
+                nameUser: userName,
+                passwordUser: userPassword
+            };
+            const result = await cookieCheck(url, {
+                method: "POST",
+                body: UserData
+            });
+            try{
+                if(result.success){
+                    if(result.answer === UserData){
+                        let data = new Date();
+                        data.setDate(data.getDate() + 3);
+                        document.cookie = `username=${encodeURIComponent(userName)}; expires=${data.toUTCString()}; path=/; max-age=-1`;
+                        console.log(document.cookie);
+                    }else{
+                        alert("Пароль или почта неверны!");
+                    }
+                }   
+            }catch(error){
+                alert(`Произошла критическая ошибка: ${error}`)
+                return;
+            }
+        
+    })
+        /*
     async function LoginInformation(url, options = {}) {
         const defaulOptions = {
             method: "GET",
@@ -94,6 +160,5 @@ document.addEventListener("DOMContentLoaded",  async function() {
         } 
     } catch (error) {
         alert("Ошибка выполнения: ", error)
-    }
+    }*/
     });
-});
