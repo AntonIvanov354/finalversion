@@ -24,7 +24,8 @@
                 .catch(error => console.error('Error:', error));
         });*/
 // URL вашего API
-const url = "http://example.com/items/";
+/*const url = "http://example.com/items/";
+
 
 // Данные, которые вы хотите отправить
 const data = {
@@ -61,3 +62,5 @@ fetch(url, {
             console.error(`Ошибка даун`, error)
         })
 })*/
+const a = ''
+if(a)

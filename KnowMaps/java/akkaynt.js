@@ -1,4 +1,4 @@
-//const url = "http://127.0.0.1:8000/api/usergg"
+const url = "http://127.0.0.1:8000/id"
 document.addEventListener("DOMContentLoaded", async function(){
 
     const title_final =  document.getElementById("title_final");
@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", async function(){
    // }if(printIdCooki.id == printIdCooki.id){
    //     console.log("sdasd ",printIdCooki.id)
    // }
-   console.log(cookieFinal) 
     async function checkUserInDataBase(url, options = {}) {
         const defaulOptions = {
             method: "POST",
@@ -73,18 +72,25 @@ document.addEventListener("DOMContentLoaded", async function(){
     //};
     //const test = '322'
     //document.cookie = `id=${42}; username=abama`;
-        const cookieUser = document.cookie
-        let date = new Date();
-        date.setDate
+        let cookieUser = document.cookie;
+       // let date = new Date();
+       if(!cookieUser){
+        window.location.reload('http://127.0.0.1:5500/KnowMaps/reg.html')
+       }
         try{
+            console.log(cookieUser)
             const result = await checkUserInDataBase(url, {
-                method: "GET",
-                body: document.cookie //body тут нужно, я же не хочy перебирать и паринимать на сайт все cookie с bd.
+                method: "POST",
+                body: document.cookie//body тут нужно, я же не хочy перебирать и паринимать на сайт все cookie с bd.
             });
             if(result.success){
-                document.cookie = `id=${result.data.cookie}; username=${result.data.username};`
+                 //date.setDate(date.getDate() + result.data.timecookie)
+                 //document.cookie = `iduser=${result.data.cookie}; username=${result.data.username};` //expires=${date.toUTCString()}; path=/`
+                console.log(`Здравствуйте, ${result.data.data.username}`) 
+                title_final.style.display = 'block';
+                //window.location.replace("http://127.0.0.1:5500/KnowMaps/glav.html")
             }else{
-                alert(`Ошибка, сообзение сервера: ${result.error}`)
+                console.log(`Ошибка в создании cookie: ${result.error}`)
             }
         }catch(jsonError){
             console.log(`Критическая ошибка на сервере ${jsonError}`);

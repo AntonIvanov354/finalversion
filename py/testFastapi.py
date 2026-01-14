@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, Cookie, UploadFile, HTTPException
+from fastapi import FastAPI, Depends, Cookie, UploadFile, HTTPException, Form
 from sqlalchemy.ext.asyncio import AsyncSession
 #from app.database import get_db
 #from app.models import UserHistory
@@ -13,6 +13,7 @@ import os
 from typicalRequestTxt import konvertationWavTotxt
 from typicalRequestMp3 import konvertationMp3TWav
 from bridge import finalWork
+from pydantic import BaseModel
 
 window = FastAPI()
 
@@ -23,10 +24,47 @@ window.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-@window.get("/checkserver")
+data = [
+    {"id": 6739, "username": "Антон"},
+    {"id": 1234, "username": "Артём"},
+    {"id": 1654, "username": "Арсений"},
+    {"id": 7890, "username": "Миша"},
+    {"id": 9876, "username": "Леха"},
+]
+@window.post("/checkserver")
 async def checkServer():
     return {"message": "True"}
-
+class Userdata(BaseModel):
+    id: str
+@window.post("/id")
+async def chekcookie1(id_cookie1: str = Cookie(None)):
+     return{
+            "data": {
+                "username": 'a',
+                "userid":id_cookie1.id
+            }
+        }
+            
+@window.post("/chekcookie2")
+async def chekcookie(id_cookie: str):
+    try:
+        for id in data:
+            if id.get('id') == id_cookie:
+                return{
+                        "data": {
+                            "username": id["username"],
+                            "userid": id["id"]
+                        }
+                }
+            
+            else:
+                print('Abama')
+    except Exception as e:
+        return{
+                "data":{
+                    "messsage": f"Ошибка: {e}"
+                }
+            }
 @window.post("/uploadfile")#, response_model=UserHistoryResponse)
 async def upload_file(file: UploadFile, access_token: str | None = Cookie(default=None)):# db: AsyncSession = Depends(get_db)):
    # user_id = get_current_user(access_token)

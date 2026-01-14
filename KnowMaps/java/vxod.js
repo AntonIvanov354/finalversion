@@ -51,32 +51,32 @@ document.addEventListener("DOMContentLoaded",  async function() {
 
         if(!userName || !userPassword){
             alert("Заполните все поля!");
-            return;
-        }//try{
-            let UserData = {
-                nameUser: userName,
-                passwordUser: userPassword
-            };
-            const result = await cookieCheck(url, {
-                method: "POST",
-                body: UserData
-            });
-            try{
-                if(result.success){
-                    if(result.answer === UserData){
-                        let data = new Date();
-                        data.setDate(data.getDate() + 3);
-                        document.cookie = `username=${encodeURIComponent(userName)}; expires=${data.toUTCString()}; path=/; max-age=-1`;
-                        console.log(document.cookie);
-                    }else{
-                        alert("Пароль или почта неверны!");
-                    }
-                }   
-            }catch(error){
-                alert(`Произошла критическая ошибка: ${error}`)
-                return;
-            }
-        
+            return;}
+     //   }//try{
+     //       let UserData = {
+     //           nameUser: userName,
+     //           passwordUser: userPassword
+     //       };
+         //   const result = await cookieCheck(url, {
+         //       method: "POST",
+         //       body: UserData
+         //   });
+         //   try{
+         //       if(result.success){
+         //           if(result.answer === UserData){
+            let data = new Date();
+            data.setDate(data.getDate() + 3);
+            document.cookie = `id=6739; username=${encodeURIComponent(userName)}; expires=${data.toUTCString()}; path=/;`;
+            console.log(document.cookie);
+                   // }else{
+                   //     alert("Пароль или почта неверны!");
+                   // }
+                //}   
+            //}catch(error){
+            //    alert(`Произошла критическая ошибка: ${error}`)
+            //    return;
+            //}
+        //
     })
         /*
     async function LoginInformation(url, options = {}) {
