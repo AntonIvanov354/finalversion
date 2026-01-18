@@ -34,17 +34,27 @@ data = [
 @window.post("/checkserver")
 async def checkServer():
     return {"message": "True"}
+
 class Userdata(BaseModel):
-    id: str
-@window.post("/id")
-async def chekcookie1(id_cookie1: str = Cookie(None)):
+    email: str
+    password: str
+
+@window.post("/reguser")
+async def chekcookie1(user_reg: Userdata):
      return{
             "data": {
                 "username": 'a',
-                "userid":id_cookie1.id
+                "cookieUser":'5241'
             }
         }
-            
+@window.post("/id")
+async def chekcookie1(user_id: str = Cookie(None)):
+     return{
+            "data": {
+                "username": 'a',
+                "cookieUser":'5241'
+            }
+        }
 @window.post("/chekcookie2")
 async def chekcookie(id_cookie: str):
     try:

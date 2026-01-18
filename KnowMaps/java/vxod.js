@@ -46,15 +46,15 @@ document.addEventListener("DOMContentLoaded",  async function() {
 
     //Сама отправка и получение файлов cookie
     
-        const userName = await document.getElementById("window_title_email").value;
+        const userEmail = await document.getElementById("window_title_email").value;
         const userPassword = await document.getElementById("window_title_password").value;
 
-        if(!userName || !userPassword){
+        if(!userEmail || !userPassword){
             alert("Заполните все поля!");
             return;}
      //   }//try{
      //       let UserData = {
-     //           nameUser: userName,
+     //           nameUser: userEmail,
      //           passwordUser: userPassword
      //       };
          //   const result = await cookieCheck(url, {
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded",  async function() {
          //           if(result.answer === UserData){
             let data = new Date();
             data.setDate(data.getDate() + 3);
-            document.cookie = `id=6739; username=${encodeURIComponent(userName)}; expires=${data.toUTCString()}; path=/;`;
+            document.cookie = `id=6739; useremail=${encodeURIComponent(userEmail)}; expires=${data.toUTCString()}; path=/;`;
             console.log(document.cookie);
                    // }else{
                    //     alert("Пароль или почта неверны!");

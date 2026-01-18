@@ -1,22 +1,19 @@
 const url = "http://127.0.0.1:8000/id"
 document.addEventListener("DOMContentLoaded", async function(){
 
-    const title_final =  document.getElementById("title_final");
-    //const buttonRegister = document.getElementById("button_register");
-    //const avatar = document.getElementById("avatar_profil");
-
-   //const printIdCooki = JSON.parse(localStorage.getItem("idcooki") || '{"id": null}');
-    //alert("1 "+ printIdCooki.id); // покажет null, но не сломается
-    //localStorage.setItem("idcooki", JSON.stringify({
-     //   id: "ggwpzizkatka" 
-    //}))
-
-   // if(printIdCooki.id !== printIdCooki.id){
-   //     alert("error")
-//
-   // }if(printIdCooki.id == printIdCooki.id){
-   //     console.log("sdasd ",printIdCooki.id)
-   // }
+ /*   const title_final =  document.getElementById("title_final");
+const buttonRegister = document.getElementById("button_register");
+const avatar = document.getElementById("avatar_profil"
+   onst printIdCooki = JSON.parse(localStorage.getItem("idcooki") || '{"id": null}');
+alert("1 "+ printIdCooki.id); // покажет null, но не сломается
+localStorage.setItem("idcooki", JSON.stringify({
+   id: "ggwpzizkatka" 
+}
+   if(printIdCooki.id !== printIdCooki.id){
+       alert("error")
+   }if(printIdCooki.id == printIdCooki.id){
+       console.log("sdasd ",printIdCooki.id)
+   }*/
     async function checkUserInDataBase(url, options = {}) {
         const defaulOptions = {
             method: "POST",
@@ -62,16 +59,16 @@ document.addEventListener("DOMContentLoaded", async function(){
             };
         };
     }
-    //const dataBase = {
-    //    users: [
-    //        {id: "42", name: "abama1"},
-    //        {id: "52", name: "abama2"},
-    //        {id: "322", name: "abama3"},
-    //        {id: "1488", name: "abama4"},
-    //    ]
-    //};
-    //const test = '322'
-    //document.cookie = `id=${42}; username=abama`;
+    /*const dataBase = {
+        users: [
+            {id: "42", name: "abama1"},
+            {id: "52", name: "abama2"},
+            {id: "322", name: "abama3"},
+            {id: "1488", name: "abama4"},
+        ]
+    };*/
+    const test = '322'
+    document.cookie = `id=${42}; username=abama`;
         let cookieUser = document.cookie;
        // let date = new Date();
        if(!cookieUser){
@@ -88,28 +85,28 @@ document.addEventListener("DOMContentLoaded", async function(){
                  //document.cookie = `iduser=${result.data.cookie}; username=${result.data.username};` //expires=${date.toUTCString()}; path=/`
                 console.log(`Здравствуйте, ${result.data.data.username}`) 
                 title_final.style.display = 'block';
-                //window.location.replace("http://127.0.0.1:5500/KnowMaps/glav.html")
+                window.location.replace("http://127.0.0.1:5500/glav1.html")
             }else{
                 console.log(`Ошибка в создании cookie: ${result.error}`)
             }
         }catch(jsonError){
             console.log(`Критическая ошибка на сервере ${jsonError}`);
         }
-//ВАЖНО!!!
-    //const userChekFinal = dataBase.users.find(u => u.id === test)
-    //if(userChekFinal){
-    //    console.log(`Привет, ${userChekFinal.name}`);
-    //    title_final.style.display = 'block';
-    //   // setTimeout(()=>{
-    //   //     window.location.replace("http://127.0.0.1:5500/KnowMaps/glav.html");
-    //   // }, 10000);
-    //    
-    //}else{
-    //    console.log('Гуляй')
-    //    window.location.replace("http://127.0.0.1:5500/KnowMaps/glav.html");
-    //}
+/*ВАЖНО!!!
+    const userChekFinal = dataBase.users.find(u => u.id === test)
+    if(userChekFinal){
+        console.log(`Привет, ${userChekFinal.name}`);
+        title_final.style.display = 'block';
+       // setTimeout(()=>{
+       //     window.location.replace("http://127.0.0.1:5500/KnowMaps/glav.html");
+       // }, 10000);
 
-/*    const data = {
+    }else{
+        console.log('Гуляй')
+        window.location.replace("http://127.0.0.1:5500/KnowMaps/glav.html");
+    }
+
+    const data = {
         id: printIdCooki.id
         
     }

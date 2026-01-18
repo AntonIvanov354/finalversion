@@ -54,19 +54,18 @@
 // Ждем, пока весь HTML-документ будет загружен и разобран*/
 document.addEventListener("DOMContentLoaded", async function() {
     // Получаем элементы из DOM по их ID
-    const button = document.getElementById("button"); // Кнопка для переключения
+    const url = "http://127.0.0.1:8000/reguser"
+    /*const button = document.getElementById("button"); // Кнопка для переключения
     const okno_reg_2 = document.getElementById("okno_reg_2"); // Второе окно регистрации
     const okno_reg_3 = document.getElementById("okno_reg"); // Первое окно регистрации
     const itog_reg_div2 = document.getElementById("itog_reg_div"); // Итоговое окно регистрации
-
+*/
     // Добавляем обработчик события на кнопку
     button.addEventListener("click", async function() {
           // Переключаем класс для второго окна регистрации
-            okno_reg_2.classList.toggle("okno_reg_3");
-            // Переключаем класс для итогового окна регистрации
-            itog_reg_div2.classList.toggle("itog_reg_div2");
-            // Переключаем класс для первого окна регистрации
-            okno_reg_3.classList.toggle("okno_reg_itog");
+            await requestRegisterServer()
+            console.log('1')
+           // window.location.replace('http://127.0.0.1:5500/akkaynt.html');
         });
 
         async function makeRequest(url, options = {}) {
@@ -113,25 +112,52 @@ document.addEventListener("DOMContentLoaded", async function() {
                 }
             }
         }
-        
-        const windowRegEmail = document.getElementById("window_email_reg").value
-        const windowRegPassword =  document.getElementById("window_password_reg").value
-        const windowRegPasswordCheck =  document.getElementById("window_user_password_replay_reg").value
+    const  requestRegisterServer = async () =>{   
+        const windowRegisterEmail = document.getElementById("window_email_reg").value;
+        const windowRegisterPassword =  document.getElementById("window_password_reg").value;
+        const windowRegisterPasswordCheck =  document.getElementById("window_user_password_replay_reg").value;
 
 
-        const newuser = {
-            email: windowRegEmail ,
-            password: windowRegPassword ,
-            password_check: windowRegPasswordCheck
-        }
-        if(windowRegPassword != windowRegPasswordCheck){
-            alert("Пароли не совпадают")
+        const userData = {
+            email: windowRegisterEmail,
+            password: windowRegisterPassword,
+        };
+
+        if(windowRegisterPassword != windowRegisterPasswordCheck){
+            alert("Ошибка, пароли не совпадают!")
+            return;
+        }else if (!windowRegisterEmail || !windowRegisterPassword || !windowRegisterPasswordCheck){
+            alert("Ошибка, заполнены не все поля!")
+            return;
+        };
+
+        try{
+            const requestRegister = await makeRequest(url, {
+                method: "POST",
+                body: userData
+            });
+
+            let date = new Date();
+            date.setDate(date.getDate() + 3);
+            if(requestRegister.success){
+                document.cookie = `id=${requestRegister.data.data.cookieUser}; path=/; expires=${date.toUTCString()}`;
+                console.log(`Cookie успешно созданы: ${document.cookie}`);
+                //window.location.reload(`http://127.0.0.1:5500/KnowMaps/akkaynt.html`);
+                /*okno_reg_2.classList.toggle("okno_reg_3");
+                 Переключаем класс для итогового окна регистрации
+                itog_reg_div2.classList.toggle("itog_reg_div2");
+                 Переключаем класс для первого окна регистрации
+                okno_reg_3.classList.toggle("okno_reg_itog");*/
+            }else{
+                console.log('Ошибка в обработке ответа от сервера!');
+                return;
+            }
+        }catch(jsonError){
+            console.log(`Критическая ошибка: ${jsonError}`);
             return;
         }
-        if (!windowRegEmail || !windowRegPassword || !windowRegPasswordCheck){
-            alert("Ошибка, заполнены не все поля!")
-        }
-        try{
+    };
+        /*         try{
             //обозначить потом url
             const result = await makeRequest(url, {
                 method: "POST",
@@ -144,7 +170,7 @@ document.addEventListener("DOMContentLoaded", async function() {
                 if(result.data.user){
                     alert(`Пользователь ${result.data.user.name} ${result.data.user.email}`)
                 }
-                if(result.data.user.cooki !== null){
+              if(result.data.user.cooki !== null){
 
                     localStorage.setItem("idcooki", JSON.stringify({
                         id: result.data.user.cooki
@@ -168,7 +194,7 @@ document.addEventListener("DOMContentLoaded", async function() {
             console.log("Ошибка: ", error)
             alert("Ошибка: " + error.message)
         }
-    })
+  
 
         const UserPassword = await document.getElementById("window_password_reg").value
         const UserPasswordReplay = await document.getElementById("window_user_password_replay_reg").value
@@ -200,4 +226,5 @@ document.addEventListener("DOMContentLoaded", async function() {
         }
         else{
             alert(`Error: Password ≠ Password replay`)
-        }
+        }*/ 
+});
