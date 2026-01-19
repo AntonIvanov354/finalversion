@@ -1,5 +1,6 @@
-from fastapi import FastAPI, Depends, Cookie, UploadFile, HTTPException, Form
+from fastapi import FastAPI, Depends, Cookie, UploadFile, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi.responses import JSONResponse
 #from app.database import get_db
 #from app.models import UserHistory
 #from app.schemas import UserHistoryResponse
@@ -38,8 +39,34 @@ async def checkServer():
 class Userdata(BaseModel):
     email: str
     password: str
+item_id = 1
 
 @window.post("/reguser")
+async def chekcookie1(user_reg: Userdata):
+     return{
+            "data": {
+                "username": 'a',
+                "cookieUser":'5241'
+            }
+        }
+@window.post("/entrance")
+async def entrance(user_entrance: Userdata):
+  #  if item_id == 1:
+  #      raise HTTPException(
+  #          status_code=400,
+  #          detail="User not register",
+  #          #headers={"X-Error": "User not register"}
+  #      )
+    
+    return JSONResponse(
+        status_code=400,
+        content={
+            "detail": "User not register!",
+            "data":{
+                "message": "Error!",
+                "userDate": user_entrance
+        }}
+    )
 async def chekcookie1(user_reg: Userdata):
      return{
             "data": {

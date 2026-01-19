@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded",  async function() {
 
-   // const url = "http://127.0.0.1:8000/cooki/{user}"
+    const url = "http://127.0.0.1:8000/entrance"
     //const printIdCooki = JSON.parse(localStorage.getItem("idcooki") || `{"id": null}`)
 
     const knopka_potverdit_vxod = document.getElementById("knopka_potverdit_vxod");
@@ -9,39 +9,47 @@ document.addEventListener("DOMContentLoaded",  async function() {
     const nadpis_yspex2 = document.getElementById("nadpis_yspex");
 
     //Универсальный(наверное) код на отправку данных и получения cookie пользователя
-    /*const cookieCheck = async (url, option = {}) => {
-        const defauOptionsrequset = {
+    const cookieCheck = async (url, options = {}) => {
+        const defaultOptionss = {
             method: "POST",
             headers: {
                 "Content-type": "application/json",
                 "Accept": "application/json"
             },
         };  
-        const requestBody = {
-            ...defauOptionsrequset,
-            ...option, 
+        const mergeOptionsst = {
+            ...defaultOptionss,
+            ...options, 
             headers: {
-                ...defauOptionsrequset.headers,
-                ...option.headers
+                ...defaultOptionss.headers,
+                ...options.headers
             },
         };
-
+         if(options.body && typeof options.body == `object`){
+                mergeOptionsst.body = JSON.stringify(options.body)
+            }
         try{
-            const requestToTheServer = await fetch(url, requestBody);
-            if(!requestToTheServer.ok){
-                throw new Error(`Запрос на проверку cooki не удался, сервер не отвечает: ${requestToTheServer.status}!`);
-            }try{
-                const resultRequest = await requestToTheServer.json();
-                const cookie = data.cookie
-                return cookie;
+            const response = await fetch(url, mergeOptionsst);
+            if(!response.ok){
+                throw new Error(`Запрос на проверку cooki не удался, сервер не отвечает: ${response.status}!`);
+            }
+            try{
+                const data = await response.json();
+                return {success: true, data, status: response.status};
+
             }catch(jsonError){
-                throw new Error(`Ошибка в обьработке ответа сервера: ${jsonError}!`);
+               const text = await response.text()
+               return{success:true, data: text, status: response.status};
             }
         }catch(error){
-            throw new Error(`Ошибка: ${error}!`);
-        } 
-    }
-*/
+            return{
+                success: false,
+                error: error.message,
+                status: error.status || 0
+                }
+            }; 
+        };
+
     knopka_potverdit_vxod.addEventListener("click", async function() {
 
     //Сама отправка и получение файлов cookie
@@ -52,55 +60,66 @@ document.addEventListener("DOMContentLoaded",  async function() {
         if(!userEmail || !userPassword){
             alert("Заполните все поля!");
             return;}
-     //   }//try{
-     //       let UserData = {
-     //           nameUser: userEmail,
-     //           passwordUser: userPassword
-     //       };
-         //   const result = await cookieCheck(url, {
-         //       method: "POST",
-         //       body: UserData
-         //   });
-         //   try{
-         //       if(result.success){
-         //           if(result.answer === UserData){
-            let data = new Date();
-            data.setDate(data.getDate() + 3);
-            document.cookie = `id=6739; useremail=${encodeURIComponent(userEmail)}; expires=${data.toUTCString()}; path=/;`;
-            console.log(document.cookie);
-                   // }else{
-                   //     alert("Пароль или почта неверны!");
-                   // }
-                //}   
-            //}catch(error){
-            //    alert(`Произошла критическая ошибка: ${error}`)
-            //    return;
-            //}
-        //
+        try{
+            const UserData = {
+                email: userEmail,
+                password: userPassword
+            };
+            const result = await cookieCheck(url, {
+              method: "POST",
+              body: UserData
+          });
+          try{
+              if(result.success){
+                    if(result.success){
+                        console.log(`Здравствуйте, ${UserData.email}`)
+                    }else{
+                        console.log(`просьба зарегаться! ${result.data.data.message}.! ${result.data.data.userDate}`)
+                    }
+                }
+            }catch(jsonErrorError){
+            }
+        }catch(jsonError){
+            console.log(jsonError)
+            
+        }
     })
+                  /*if(result.answer === UserData){
+                        let data = new Date();
+                        data.setDate(data.getDate() + 3);
+                        document.cookie = `id=6739; useremail=${encodeURIComponent(userEmail)}; expires=${data.toUTCString()}; path=/;`;
+                        console.log(document.cookie);
+                   }else{
+                       alert("Пароль или почта неверны!");
+                   }
+                }   
+            }catch(error){
+                alert(`Произошла критическая ошибка: ${error}`)
+                return;
+            }*/;
         /*
-    async function LoginInformation(url, options = {}) {
-        const defaulOptions = {
+    async function LoginInformation(url, optionss = {}) {
+        const defaulOptionss = {
             method: "GET",
             headers: {
                 "Content-type": "application/json",
                 "Accept": "application/json"
             },
         };
-        const MergeOptions = {
-            ...defaulOptions,
-            ...options,
+        const MergeOptionss = {
+            ...defaulOptionss,
+            ...optionss,
             headers: {
-                ...defaulOptions.headers,
-                ...options.headers
+                ...defaulOptionss.headers,
+                ...optionss.headers
             },
         };  
-        if(options.body && typeof options.body == `object`){
-            MergeOptions.body = JSON.stringify(options.body)
+        if(optionss.body && typeof optionss.body == `object`){
+            MergeOptionss.body = JSON.stringify(optionss.body)
         }
 
         try{
-            const response = await fetch(url, MergeOptions)
+            const response = await fetch(url, MergeOptionss)
 
             if(!response.ok){
                 throw new Error (`HTTP ${response.status} ${response.statusText}`) 

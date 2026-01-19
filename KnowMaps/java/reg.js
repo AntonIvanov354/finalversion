@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", async function() {
                     return {success: true, data, status: response.status}
                 }catch(jsonError){
                     const text = await response.text()
-                    return {success: true, daata: text, status: response.status}
+                    return {success: true, data: text, status: response.status}
                 }
 
             } catch(error){
