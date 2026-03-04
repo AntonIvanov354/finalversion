@@ -85,7 +85,7 @@ localStorage.setItem("idcooki", JSON.stringify({
                  //document.cookie = `iduser=${result.data.cookie}; username=${result.data.username};` //expires=${date.toUTCString()}; path=/`
                 console.log(`Здравствуйте, ${result.data.data.username}`) 
                 title_final.style.display = 'block';
-                window.location.replace("http://127.0.0.1:5500/glav1.html")
+                window.location.replace("http://127.0.0.1:5500/KnowMaps/glav1.html")
             }else{
                 console.log(`Ошибка в создании cookie: ${result.error}`)
             }

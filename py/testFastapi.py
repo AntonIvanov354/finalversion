@@ -59,13 +59,14 @@ async def entrance(user_entrance: Userdata):
   #      )
     
     return JSONResponse(
-        status_code=400,
+        status_code=220,
         content={
             "detail": "User not register!",
             "data":{
                 "message": "Error!",
-                "userDate": user_entrance
-        }}
+                "userDate": str(user_entrance)
+            }
+        }
     )
 async def chekcookie1(user_reg: Userdata):
      return{

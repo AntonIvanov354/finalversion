@@ -27,9 +27,15 @@ document.addEventListener("DOMContentLoaded",  async function() {
         };
          if(options.body && typeof options.body == `object`){
                 mergeOptionsst.body = JSON.stringify(options.body)
-            }
+            };
+
         try{
             const response = await fetch(url, mergeOptionsst);
+            if(response.status === 401){
+                const text = await response.text();
+                console.log(text)
+                return{success:false, status: response.status, data: text};
+            }
             if(!response.ok){
                 throw new Error(`Запрос на проверку cooki не удался, сервер не отвечает: ${response.status}!`);
             }
@@ -72,15 +78,19 @@ document.addEventListener("DOMContentLoaded",  async function() {
           try{
               if(result.success){
                     if(result.success){
-                        console.log(`Здравствуйте, ${UserData.email}`)
+                        console.log(`Здравствуйте, ${UserData.email}!!`)
+                        okno_vxoda_osnova.classList.toggle("okno_vxoda_osnova_itog");
+                        okno_vxod_osnova_2.classList.toggle("okno_vxod_osnova_1")
+                        nadpis_yspex2.classList.toggle("nadpis_yspex2")
                     }else{
-                        console.log(`просьба зарегаться! ${result.data.data.message}.! ${result.data.data.userDate}`)
+                        console.log(`Ошибка!`)
                     }
                 }
-            }catch(jsonErrorError){
+            }catch(jsonError){
+                console.log(`${jsonError}, ошибка!`)
             }
         }catch(jsonError){
-            console.log(jsonError)
+            console.log(`Ошибка: ${jsonError}!`)
             
         }
     })
