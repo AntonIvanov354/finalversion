@@ -54,12 +54,12 @@
 // Ждем, пока весь HTML-документ будет загружен и разобран*/
 document.addEventListener("DOMContentLoaded", async function() {
     // Получаем элементы из DOM по их ID
-    const url = "http://127.0.0.1:8000/reguser"
-    /*const button = document.getElementById("button"); // Кнопка для переключения
+ /*   const url = "http://127.0.0.1:8000/reguser"
+    //const button = document.getElementById("button"); // Кнопка для переключения
     const okno_reg_2 = document.getElementById("okno_reg_2"); // Второе окно регистрации
     const okno_reg_3 = document.getElementById("okno_reg"); // Первое окно регистрации
     const itog_reg_div2 = document.getElementById("itog_reg_div"); // Итоговое окно регистрации
-*/
+
     // Добавляем обработчик события на кнопку
     button.addEventListener("click", async function() {
           // Переключаем класс для второго окна регистрации
@@ -142,12 +142,13 @@ document.addEventListener("DOMContentLoaded", async function() {
             if(requestRegister.success){
                 document.cookie = `id=${requestRegister.data.data.cookieUser}; path=/; expires=${date.toUTCString()}`;
                 console.log(`Cookie успешно созданы: ${document.cookie}`);
+                captcha()
                 //window.location.reload(`http://127.0.0.1:5500/KnowMaps/akkaynt.html`);
-                /*okno_reg_2.classList.toggle("okno_reg_3");
-                 Переключаем класс для итогового окна регистрации
-                itog_reg_div2.classList.toggle("itog_reg_div2");
-                 Переключаем класс для первого окна регистрации
-                okno_reg_3.classList.toggle("okno_reg_itog");*/
+                //okno_reg_2.classList.toggle("okno_reg_3");
+                 //Переключаем класс для итогового окна регистрации
+                //itog_reg_div2.classList.toggle("itog_reg_div2");
+                 //Переключаем класс для первого окна регистрации
+                //okno_reg_3.classList.toggle("okno_reg_itog");
             }else{
                 console.log('Ошибка в обработке ответа от сервера!');
                 return;
@@ -156,8 +157,34 @@ document.addEventListener("DOMContentLoaded", async function() {
             console.log(`Критическая ошибка: ${jsonError}`);
             return;
         }
-    };
-        /*         try{
+    };*/
+    const captcha = async () => {
+        try{
+            const buttonChek = document.getElementById("buttonChek");
+            const windowRegisterHide = document.getElementById("entrance_user");
+            //windowRegisterHide.style.display = "none";
+            const captcha = document.getElementById("captcha")
+
+            buttonChek.addEventListener("click", async function() {
+
+                const windowChek = await document.getElementById("windowChek").value;
+                const titlError = document.getElementById("titleError");
+                console.log(windowChek)
+
+                if(windowChek != 3){
+                    console.log("СОСАЛ?")
+                    return;
+                }else{
+                    captcha.style.display = "none"
+                    windowRegisterHide.style.display = "block"
+                    console.log("Yes")
+                }})
+        }catch(Error){
+                console.log(Error)
+        }    
+    }    
+captcha()
+    /*         try{
             //обозначить потом url
             const result = await makeRequest(url, {
                 method: "POST",

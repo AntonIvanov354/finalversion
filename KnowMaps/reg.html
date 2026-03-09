@@ -53,7 +53,7 @@
         <h1 class="itog_reg">Скоро тут будет анимация, но надо ждать:_)</h1>
     </div>
 </div>-->
-<div class="entrance_user" style="display: none;">
+<div class="entrance_user" id="entrance_user" style="display: none;">
     <div class="main_window">
         <h1 class="window_title">Вход</h1>
         <p class="signature_window_email">
@@ -75,17 +75,21 @@
     </div>
 </div>
 
-<div class="captcha">
+<div class="captcha" id="captcha">
     <div class="window_cube_one">
             <pre class="condition">
-Дан куб, S = 24см². 
+Дан куб, S = 18 см². 
 Найдите диагональ куба, 
 если формула площади:
 S = 6a².
             </pre>
         <p class="entering_a_response_p">
             <input type="number" 
-                   class="entering_a_response_input"></p>
+                   class="entering_a_response_input"
+                   id="windowChek"></p>
+        <button class="buttonChek"
+                id="buttonChek">Проверить
+                </button>
         <div class="window_cube_three">
         </div>
         <div class="window_cube_two">
