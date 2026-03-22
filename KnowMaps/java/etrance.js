@@ -3,11 +3,12 @@ document.addEventListener("DOMContentLoaded", async function() {
     //Все необходимые элементы/переменные
     const url = "http://127.0.0.1:8000/entrance";
     const registerButton = document.getElementById("buttonEntrance");
-
     //Нажатие кнопки, после чего происходит проверка данных на сервере и в дальнейшем выводе либо ошибки либо вход в аккаунт
     registerButton.addEventListener("click", async function() {
           // Отправка данных на сервак
             await requestEntranceServer();
+            document.cookie = `abma=${encodeURIComponent("1488Условноcookie")}; path=/;`
+            console.log(document.cookie)
         });
 
         async function makeRequest(url, options = {}) {
@@ -68,6 +69,23 @@ document.addEventListener("DOMContentLoaded", async function() {
             id_window_error_email.style.display = "block";
             id_window_error_password.style.display = "block";
         };
+        
+        //Поиск нужных cookie
+        const SearchForAnOppCookie = (email) => {
+        
+            const cookieString = document.cookie;
+            const cookies = cookieString.split(";");
+
+            const targetCookie = cookies.findLast(cookie => 
+                cookie.startsWith(email + "=")
+            );
+
+            if(targetCookie){
+                return targetCookie.split("=")[1];
+            };
+
+            return null;
+        };
 
         //Все необходимые списки
 
@@ -75,6 +93,7 @@ document.addEventListener("DOMContentLoaded", async function() {
         const userData = {
             email: window_email_data,
             password: window_password_data,
+            cookie: SearchForAnOppCookie(window_email_data)
         };
         //Запрос на сервер
         try{
@@ -87,13 +106,13 @@ document.addEventListener("DOMContentLoaded", async function() {
             date.setDate(date.getDate() + 3);
             if(requestEntrance.status === 401 || !requestEntrance.success){
                 print_error_email_and_password();
-                console.log("Error pasword or mail!");
+                console.log("Error password or mail!");
                 return;
             }
 
             if(requestEntrance.success){
                 //Измемнение поведения файлов cookie про true ответе от сервера
-                
+                //document.cookie = ``
                 //document.cookie = `id=${requestEntrance.data.data.cookieUser}; path=/; expires=${date.toUTCString()}`;
                 //console.log(`Cookie успешно созданы: ${document.cookie}`);
                 
