@@ -158,7 +158,7 @@ class RussianTextSummarizer:
         return summary
 
     def preprocess_function(self, examples, max_input_length=512, max_target_length=128):
-        """Предобработка данных для обучения"""
+ 
         inputs = examples["text"]
         targets = examples["summary"]
 
@@ -378,7 +378,7 @@ async def interactive_large_text_summarizer(fileText):
 
     if text:
         print(f"📊 Текст получен: {len(text)} символов")
-        target_length = min(10000, len(text) // 15)  # Целевая длина ~6.7% от оригинала
+        target_length = min(10000, len(text) // 15)  
 
         summary = summarizer.summarize_large_text(text, target_length)
         print("\n✅ РЕЗУЛЬТАТ:")

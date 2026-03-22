@@ -12,7 +12,7 @@
 /* Стили для тела страницы */
 body {
     margin: 0; /* Убираем отступы по умолчанию у body */
-    overflow: y; /* Скрываем любые полосы прокрутки */
+    overflow:hidden; /* Скрываем любые полосы прокрутки */
     background-color: rgb(10, 10, 10);
 }
 
@@ -35,353 +35,140 @@ body {
 .FAQ:hover, .Nastr:hover, .History:hover, .Akkaynt:hover {
     transform: scale(1.2); /* Увеличиваем размер элемента при наведении */
 }
-.okno_reg{
-    border: 2px solid white;
-    width: 30%;
-    height: 52%;
-    margin-top: 30px;
-    border-radius: 10px;
-    position: absolute;
-    z-index: 0;
-    overflow: hidden;
-    justify-self: center;
-}
-/*.okno_reg::before{
-    content: "";
-    z-index: -1;
-    position: absolute;
-    border:350px solid transparent;
-    border-right: 350px solid rgb(255, 255, 255);
-    border-bottom: 350px solid rgb(255, 255, 255);
-    transition: all 1s;
-    transform: translateX(0);
-}*/
-/*.okno_reg::before{
-    content: "";
-    z-index: -1;
-    border: 240px solid red;
-    left: 30px;
-    position: relative;
-}*/
 
-.nadpis_reg{
-    display: grid;
-    grid-template-rows: 50px;
-    color: white;
-    text-align: center;
-    font-size: clamp(10px, 2em, 50px);
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: normal;
-    margin: 0;
-    align-items: center;
-
-}
-/*.okno_reg::before{
-    content: "";
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-    position: absolute;
-    border-radius: 10px;
-    background-size: 400%;
-    filter: blur(5px);
-    top: -4px; Сдвиг вверх на 2 пикселя для создания эффекта обрамления 
-    left: -4px;  Сдвиг влево на 2 пикселя для создания эффекта обрамления 
-    width: calc(100% + 10px); 
-    height: calc(100% + 10px);
-    animation: glowing 20s linear infinite;
-    transition:  opacity .3s ease-in-out;
-    z-index: -1;
-}
-.okno_reg::after{
-    z-index: -1; /* За кнопкой 
-    content: ''; /* Пустое содержимое для псевдоэлемента *
-    position: absolute; /* Абсолютное позиционирование *
-    width: 100%; /* Ширина равна ширине кнопки *
-    height: 100%; /* Высота равна высоте кнопки *
-    background: #111; /* Фоновый цвет для псевдоэлемента *
-    left: 0; /* Выравнивание по левому краю *
-    top: 0; /* Выравнивание по верхнему краю *
-    border-radius: 10px; /* Скругление углов для псевдоэлемента 
-}
-@keyframes glowing {
-    0% { background-position: 0 0; } /* Начальная позиция фона 
-    50% { background-position: 400% 0; } /* Позиция фона в середине анимации *
-    100% { background-position: 0 0; } /* Конечная позиция фона *
-}
-*/
-
-
-.napis_email_reg, .napis_password_reg, .napis_password2_reg{
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 70px;
-    width: 100%;
-    height: 100%;
-    margin: 10px;
-
-}
-
-
-.nadpis_email{
-    color: rgb(255, 255, 255);
-    font-family: 'Courier New', Courier, monospace;
-    position: relative;
-    font-size: clamp(0.01em, 5vw, 30px);
-    left: 25px;
-}
-.nadpis_password2{
-    color: rgb(255, 255, 255);
-    font-family: 'Courier New', Courier, monospace;
-    left: 25px;
-    font-size: clamp(0.1em, 0.25em + 2vw, 30px);
-    position: relative;
-}
-.nadpis_password{
-    color: rgb(255, 255, 255);
-    font-family: 'Courier New', Courier, monospace;
-    left: 25px;
-    font-size: clamp(0.1em, 0.25em + 2vw,30px);
-    position: relative;
-}
-
-.nadpis_email_okno, .nadpis_password_okno, .nadpis_password2_okno{
-    left: 36px;
-    width: 60%;
-    height: 10%;
-    position: relative;
-}
-.knopka_okno_reg{
-/*внешний вид кнопки*/
-    display: grid;
-    grid-template-columns: auto;
-    justify-self: center;
-    height: 30px;
-    width: 175px;
-    top: 40px;
-    align-items: center;
-    border-radius: 10px;
-    background-color: rgb(0, 0, 0);
-    color: white;
-    font-size: 15px;
-    font-family: 'Courier New', Courier, monospace;
-    position: relative;
-    z-index: 0;
-    cursor: pointer;
-    border: none;
-    outline: none;
-}   
-.knopka_okno_reg::before{
-    content: '';
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);    
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    background-size: 400%;
-    z-index: -1;
-    filter: blur(5px);
-    width: calc(100% + 8px);
-    height: calc(100% + 8px);
-    animation: glowing 20s linear infinite;
-    transition: opacity .3s ease-in-out;
-    border-radius: 10px;
-}
-.knopka_okno_reg::after{
-    z-index: -1;
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    border-radius: 10px;
-    background: #111;
-}
-.knopka_okno_reg:hover::before{
-    background:rgb(255, 0, 0);
-    transition: all 1s;
-}
-@keyframes glowing{
-    0%{background-position: 0 0;}
-    50%{background-position: 400% 0 ;}
-    100%{background-position: 0 0;}
-}
-/*.okno_reg_2{
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 1s, visibility 1s ease;
-    position: absolute;
-}
-.okno_reg_3{
-    opacity: 0;
-    visibility: hidden;
-}
-.itog_reg_div{
-    opacity: 0;
-    visibility: hidden;
-}
-.itog_reg_div2{
-    opacity: 1;
-    visibility: visible;
-    transition: opacityred 0.5s ease;  Плавный переход для opacity 
-    display: grid;
-    grid-template-columns: 1fr;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-}
-.okno_reg_itog::before{
-    background-color: white;
-}
-.itog_reg{
-    color: rgb(0, 0, 0);
-    display: block;
-    place-items: center;
-}*/
-
-
-
-
-.entrance_user{
-    width: 100%;
-    height: calc(91% + 5px);
-    background-color: rgb(10, 10, 10);
-    position: absolute;
-    display: grid;
-    grid-template-columns: repeat(1, auto);
-    font-family: 'Courier New', Courier, monospace;
-}
-.main_window{
-    justify-self: center;
-    align-self: center;
-    background-color: #888787;
-    width: 400px;
-    height: 450px;
-    border-radius: 10px;
-    display: grid;
-    grid-template-rows: repeat(4, 25%);
-}
 .window_title{
     color: white;
     justify-self: center;
+    top: -100px;
     font-size: 50px;
     cursor: default;
+    margin: 0;    
+}
+
+.entrance_user{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(10, 10, 10);
+    position: absolute;
+    display: grid;
+    top: 25%;
+    grid-template-rows: min-content;
+}
+.main_window{
+    justify-self: center;
+    align-self: top;
+    background-color: rgb(254,211,43);
+    width: 420px;
+    height: 350px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-rows: repeat(3, 33%);
+}
+
+.gridEmail, .gridRegister{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    justify-self: center;
+    align-self: center;
+    width: 100%;
+    height: 100%;
 }
 .signature_window_email, .password_signature_window{
-    justify-self: left;
     align-self: center;
     font-size: 20px;
-    margin-left: 10px;
     font-weight: bold;
+    margin-left: 10px;
 }
 .input_window_email, .password_input_window{
     border-radius: 10px;
     width: 290px;
-    height: 30px;
-    margin-left: 1px;
-    position: relative;
-    z-index: 0;
+    height: 32px;
     border: #000;
+    background-color: rgb(32,35,42);
+    -webkit-text-fill-color: rgb(255, 255, 255);
+    
+}
+.title_error_and_window_input_password, .title_error_and_window_input_email{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+.title_error_password, .title_error_email{
+    align-self: center;
+    justify-self: center;
+    margin: 0;
+    color: red;
+    cursor: default;
+    display: block;
+}
+.error_password, .error_email{
+    position: absolute;
+    display: none;
+    border: 2px solid red;
+    width: auto;
+    height: auto;
+    background: red;
+    border-radius: 10px;
+    margin-top: 10px;
+    z-index: 0;
+}
+.error_password::before, .error_email::before{
+    content: "";
+    border: 20px solid transparent;
+    border-bottom: 20px solid red; 
+    border-left: 20px solid red;
+    position: absolute;
+    z-index: -1;
+    top: -12px;
+    left: 5px;
+}
+.detailed_error_password, .detailed_error_email{
+    color:rgb(255, 255, 255);
+    font-size: 20px;
+    margin: 0;
+}
+.title_error_password:hover .error_password, .title_error_email:hover .error_email{
+    display: block;
+}
+.p_input_window_email, .p_password_input_window{
+    justify-self: center;
+    align-self: center;
+    margin: 0;
+    position: relative;
+}
+.input_window_email:focus, .password_input_window:focus{
+    outline: none;
+    box-shadow: 0px 0px 5px rgb(255, 255, 255);
+}
+input:-webkit-autofill{
+    border:2px solid rgb(255, 255, 255);
+    box-shadow: 0px 0px 5px white;
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-box-shawod: 0 0 0px 1000px rgb(32,35,42) inset;
+    caret-color: white;
 }
 .button{
     display: grid;
     grid-template-columns: repeat(2, 50%);
 }
 .button_entrance, .register_button{
-    background-color: #000;
+    background: rgb(32,35,42);
     width: 130px;
     height: 43px;
     color: white;
     border-radius: 10px;
-    align-self: center;
-    justify-self: right;
-    margin-right: 10px;
-    border: none;
-    outline: none;
-    font-size: 15px;
-}
-.captcha{
-    width: 100%;
-    height: calc(91% + 5px);
-    background-color: rgb(10, 10, 10);
-    position: absolute;
-    display: grid;
-    grid-template-rows: repeat(1, auto);
-    font-family: 'Courier New', Courier, monospace;
-}
-.window_cube_one{
+    align-self: top;
+    margin-top: 10%;
     justify-self: center;
-    align-self: center;
-    border: 3px solid red;
-    width: 300px;
-    height: 350px;
-    position: relative;
+    margin-right: 10px;
+    border: 2px solid white;
+    font-size: 15px;
+    cursor: pointer;
 }
-.window_cube_two{
-    border: 3px solid red;
-    width: 300px;
-    height: 100px;
-    top: -108px;
-    left: calc(59px + 0.49px);
-    position: relative;
-    transform: skew(-50deg);
-}
-.window_cube_three{
-    border: 3px solid red;
-    width: 120px;
-    height: 350px;
-    left: 300px;
-    top: -55px;
-    position: absolute;
-    transform:skewY(-40deg);
-}
-.window_cube_the_dashes_one{
-    border-bottom: 3px dotted red;
-    border-right: 3px dotted red;
-    width: 120px;
-    height: 350px;
-    right: 179px;
-    top: -55px;
-    position: absolute;
-    transform:skewY(-40deg);
-}
-.window_cube_the_dashes_two{
-    position: absolute;
-    border-bottom: 3px dotted red;
-    width: 301px;
-    bottom: 100px;
-    left: 120px;
-}
-.condition{
-    color: rgb(255, 255, 255);
-    font-size: 20px;
-    position: absolute;
-    left: 14px;
-}
-.entering_a_response_p{
-    position: absolute;
-    top: 120px;
-    left: 125px;
-}
-.entering_a_response_input{
-    height: 20px;
-    width: 165px;
-    color: red;
-    border-radius: 5px;
-}
-.entering_a_response_input:focus{
+.button_entrance:active, .register_button:active{
+    background: #000000;
+    /*-webkit-box-shadow: inset 0px 0px 5px #000000;
+        -moz-box-shadow: inset 0px 0px 5px #000000;
+            box-shadow: inset 0px 0px 5px #000000;*/
     outline: none;
-    border: 1px solid red;
-    box-shadow: 0px 0px 5px red;
-}
-.buttonChek{
-    position: absolute;
-    color: red;
-    border: 2px dotted red;
-    background-color: rgb(10, 10, 10);
-    border-radius: 5px;
-    width: 120px;
-    height: 30px;
-    top: 270px;
-    left: 135px;
-    transform: skewY(-1,5deg);
-    cursor:pointer;
 }

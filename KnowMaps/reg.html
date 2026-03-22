@@ -16,92 +16,56 @@
         <p onclick="alert(`К сожеление данный раздел пока не доступен`)" class="Nastr">Настройки</p>
         <p onclick="window.location.href=`FAQ.html`" class="FAQ">FAQ</p>
         </div>
-    
-    <!--    <aside>    
-            <div class="pod-head">
-                <div id="menu" class="menu" style="display: none;">
-                    <ul>
-                        <li><a>1. История</a></li>
-                        <li><a>2. Настройки</a></li>
-                        <li><a>3. FAQ</a></li>
-                        <li><a>4. Главная</a></li>
-                    </ul>
+    </header>
+
+<div class="entrance_user" id="entrance_user">
+    <h1 class="window_title">Вход</h1>
+        <div class="main_window">
+            
+            <div class="gridEmail">
+                <p class="signature_window_email">
+                    Почта:</p>
+                <div class="title_error_and_window_input_email">
+                    <p class="p_input_window_email">
+                        <input type="email" 
+                            class="input_window_email"
+                            id="window_email_data">
+                    </p>
+                    <div class="title_error_email" id="title_error_email">ⓘ
+                        <div class="error_email">
+                            <div class="the_figure_is_an_error_two_email"></div>
+                                <pre class="detailed_error_email">
+Ошибка, почта введена неверно или нет 
+пользователя с такой почтой!</pre>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </aside>-->
-    </header>
-<!--ВАЖНО!!!!
-    <div class="okno_reg" id="okno_reg">
-    <div class="okno_reg_2" id="okno_reg_2">
-        <h1 class="nadpis_reg">Регистрация</h1>
-        <div class="napis_email_reg">
-            <h1  class="nadpis_email">Введи вашу почту:</h1>
+            <div class="gridRegister">
+                <p class="password_signature_window" style="font-size: 18px;">
+                    Пароль:</p>
+                <div class="title_error_and_window_input_password">
+                    <p class="p_password_input_window">
+                        <input type="password" 
+                            class="password_input_window"
+                            id="window_password_data">
+                    </p>
+                    <div class="title_error_password" id="title_error_password">ⓘ
+                        <div class="error_password">
+                            <div class="the_figure_is_an_error_two"></div>
+                                <pre class="detailed_error_password">
+Ошибка, пароль неверный или нет 
+пользователя с таким паролем!</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="button">
+                <button class="register_button" id="registerButton">Регистрация</button>
+                <button class="button_entrance" id="buttonEntrance">Вход</button>
+            </div>
         </div>
-        <input type="email" class="nadpis_email_okno" id="window_email_reg">
-        <div class="napis_password_reg">
-            <h1  class="nadpis_password">Придумайте пароль:</h1>
-        </div>
-        <input type="password" class="nadpis_password_okno" id="window_password_reg">
-        <div class="napis_password2_reg">
-            <h1  class="nadpis_password2">Повторите</h1>
-        </div>
-        <input type="password" class="nadpis_password2_okno" id="window_user_password_replay_reg">
-
-        <button class="knopka_okno_reg" id="button">Зарегистрироваться</button>
-    </div>
-    <!--<div class="itog_reg_div" id="itog_reg_div">
-        <h1 class="itog_reg">Скоро тут будет анимация, но надо ждать:_)</h1>
-    </div>
-</div>-->
-<div class="entrance_user" id="entrance_user" style="display: none;">
-    <div class="main_window">
-        <h1 class="window_title">Вход</h1>
-        <p class="signature_window_email">
-            Почта:<input type="email" 
-                         class="input_window_email" 
-                         placeholder="KnowMap@gmail.com"
-                         style="margin-left: 15px;">
-        </p>
-        <p class="password_signature_window">
-            Пароль:<input type="password" 
-                   class="password_input_window"
-                   placeholder="*********" 
-                   style="margin-left: 5px;">
-        </p>
-        <div class="button">
-            <button class="register_button">Регистрация</button>
-            <button class="button_entrance">Вход</button>
-        </div>
-    </div>
-</div>
-
-<div class="captcha" id="captcha">
-    <div class="window_cube_one">
-            <pre class="condition">
-Дан куб, S = 18 см². 
-Найдите диагональ куба, 
-если формула площади:
-S = 6a².
-            </pre>
-        <p class="entering_a_response_p">
-            <input type="number" 
-                   class="entering_a_response_input"
-                   id="windowChek"></p>
-        <button class="buttonChek"
-                id="buttonChek">Проверить
-                </button>
-        <div class="window_cube_three">
-        </div>
-        <div class="window_cube_two">
-        </div>
-        <div class="window_cube_the_dashes_one">
-        </div>
-        <div class="window_cube_the_dashes_two">
-        </div>
-    </div>
 </div>
 <script src="java/reg.js" type="module"></script>
 </body>
 </html>
-
-<script src="java/reg.js"></script>

@@ -61,10 +61,10 @@ document.addEventListener("DOMContentLoaded", async function(){
         formData.append("Category", "audio");
 
         if(formData){
-            const finalStepCheck = await(functionCheckServer(urlChekServer));
+          //  const finalStepCheck = await(functionCheckServer(urlChekServer));
 
-            if(finalStepCheck === 'True') 
-            {
+          //  if(finalStepCheck === 'True') 
+          //  {
                 console.log(`Файл успешно загружен в FromData: ${namefile}`);
 
                 try{
@@ -110,9 +110,9 @@ document.addEventListener("DOMContentLoaded", async function(){
                     console.error(`Ошибка в сетевом запросе: ${jsonError}`);
                     // window.location.reload();
                     }
-            }else{
-                alert(`На данный момент сервер недоступен, попробуйте позже!`)
-            }
+//            }else{
+  //              alert(`На данный момент сервер недоступен, попробуйте позже!`)
+            //}
         }else if(!formData){
             console.error(`Ошибка в загрузке файла! ${formData}`);
             // window.location.reload();
