@@ -84,6 +84,7 @@ body {
     width: 290px;
     height: 32px;
     border: #000;
+    caret-color: yellow;
     background-color: rgb(32,35,42);
     -webkit-text-fill-color: rgb(255, 255, 255);
     
@@ -98,7 +99,7 @@ body {
     margin: 0;
     color: red;
     cursor: default;
-    display: block;
+    display: none;
 }
 .error_password, .error_email{
     position: absolute;

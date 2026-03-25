@@ -1,14 +1,12 @@
 // Ждем, пока весь HTML-документ будет загружен и разобран
 document.addEventListener("DOMContentLoaded", async function() {
     //Все необходимые элементы/переменные
-    const url = "http://127.0.0.1:8000/entrance";
+    const url = "http://127.0.0.1:8000/users/login";
     const registerButton = document.getElementById("buttonEntrance");
     //Нажатие кнопки, после чего происходит проверка данных на сервере и в дальнейшем выводе либо ошибки либо вход в аккаунт
     registerButton.addEventListener("click", async function() {
           // Отправка данных на сервак
             await requestEntranceServer();
-            document.cookie = `abma=${encodeURIComponent("1488Условноcookie")}; path=/;`
-            console.log(document.cookie)
         });
 
         async function makeRequest(url, options = {}) {
@@ -33,21 +31,27 @@ document.addEventListener("DOMContentLoaded", async function() {
                 mergeOptionst.body = JSON.stringify(options.body)
             }
             try{
-                const response = await fetch(url, mergeOptionst)
+                const response = await fetch(url, mergeOptionst);
 
-                if(!response.ok){
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+                if(response.status === 401){
+                    const text = await response.json();
+                    return {success: true, data: text, status: response.status};
                 }
+                else{
+                    if(!response.ok){
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+                    }
 
-                try{
-                    const data = await response.json()
-                    return {success: true, data, status: response.status}
-                }catch(jsonError){
-                    const text = await response.text()
-                    return {success: true, data: text, status: response.status}
+                    try{
+                        const data = await response.json()
+                        return {success: true, data, status: response.status}
+
+                    }catch(jsonError){
+                        const text = await response.text()
+                        return {success: true, data: text, status: response.status}
+                    }
                 }
-
-            } catch(error){
+            }catch(error){
                 return {
                     success: false,
                     error: error.message,
@@ -93,35 +97,35 @@ document.addEventListener("DOMContentLoaded", async function() {
         const userData = {
             email: window_email_data,
             password: window_password_data,
-            cookie: SearchForAnOppCookie(window_email_data)
+            // Не нужно и все:
+            // cookie: SearchForAnOppCookie(window_email_data)
         };
+
         //Запрос на сервер
         try{
             const requestEntrance = await makeRequest(url, {
                 method: "POST",
                 body: userData
             });
-
-            let date = new Date();
-            date.setDate(date.getDate() + 3);
-            if(requestEntrance.status === 401 || !requestEntrance.success){
+            // Если пароль не подходит или почта, выкидываем ошибку.
+            if(!requestEntrance.ok && requestEntrance.status === 401){
                 print_error_email_and_password();
-                console.log("Error password or mail!");
-                return;
-            }
-
-            if(requestEntrance.success){
-                //Измемнение поведения файлов cookie про true ответе от сервера
-                //document.cookie = ``
-                //document.cookie = `id=${requestEntrance.data.data.cookieUser}; path=/; expires=${date.toUTCString()}`;
-                //console.log(`Cookie успешно созданы: ${document.cookie}`);
-                
+                return console.log(`Error password or mail! ${requestEntrance.status}`);
             }else{
-                console.log('Ошибка в обработке ответа от сервера!');
-                return;
+                if(requestEntrance.success){
+                    // jwt.token: requestEntrance.data.access_token
+                    // должен добавить Арс, не я: path=/; samesite=lax; secure;
+                    document.cookie = `${encodeURIComponent(userData.email)}=${requestEntrance.data.access_token}; max-age=172800;`;
+                    console.log(document.cookie);
+
+                }else{
+                    console.log('Ошибка в обработке ответа от сервера!');
+                    print_error_email_and_password();
+                }
             }
         }catch(jsonError){
             console.log(`Критическая ошибка: ${jsonError}`);
+            print_error_email_and_password();
             return;
         }
     };
