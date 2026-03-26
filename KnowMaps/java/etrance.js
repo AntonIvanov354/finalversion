@@ -116,6 +116,8 @@ document.addEventListener("DOMContentLoaded", async function() {
                     // jwt.token: requestEntrance.data.access_token
                     // должен добавить Арс, не я: path=/; samesite=lax; secure;
                     document.cookie = `${encodeURIComponent(userData.email)}=${requestEntrance.data.access_token}; max-age=172800;`;
+                    //Создание cookie с почтой пользователя
+                    document.cookie = `email_user=${userData.email}; max-age=172800;`; 
                     console.log(document.cookie);
 
                 }else{

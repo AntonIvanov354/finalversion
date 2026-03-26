@@ -14,7 +14,8 @@ localStorage.setItem("idcooki", JSON.stringify({
    }if(printIdCooki.id == printIdCooki.id){
        console.log("sdasd ",printIdCooki.id)
    }*/
-    async function checkUserInDataBase(url, options = {}) {
+  //От сюда пока не убираем
+    /*async function checkUserInDataBase(url, options = {}) {
         const defaulOptions = {
             method: "POST",
             headers: {
@@ -67,6 +68,24 @@ localStorage.setItem("idcooki", JSON.stringify({
             {id: "1488", name: "abama4"},
         ]
     };*/
+    
+    //Функция для выяснения почты пользователя
+    const userEmail = () => {
+        const cookieList = document.cookie.split("; ");
+        const serchEmail = cookieList.find(cookieList => 
+            cookieList.startsWith(`email_user=`)
+            )  
+        if(serchEmail){
+            const finalListCookie = serchEmail.split("=")[1];
+            return finalListCookie;
+            }
+        }
+
+        //Вывод почты на сайт
+        var emailUserInPage = document.getElementById("title_beggining_email");
+        emailUserInPage.textContent = userEmail();
+
+    /*
     const test = '322'
     document.cookie = `id=${42}; username=abama`;
         let cookieUser = document.cookie;
