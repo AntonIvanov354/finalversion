@@ -1,6 +1,16 @@
 document.addEventListener("DOMContentLoaded",  async function() {
 
-    const url = "http://127.0.0.1:8000/entrance"
+    const registerPasswordWindow = document.getElementById("input_password_register").value;
+    const registerPasswordWindowReplay =  document.getElementById("input_replay_password_register").value;
+    const buttonRegister = document.getElementById("button_register");
+
+    buttonRegister.addEventListener("click", function() {
+        if(registerPasswordWindow !== registerPasswordWindowReplay){
+            console.log("a")
+        }
+    })
+
+/*   const url = "http://127.0.0.1:8000/entrance"
     //const printIdCooki = JSON.parse(localStorage.getItem("idcooki") || `{"id": null}`)
 
     const knopka_potverdit_vxod = document.getElementById("knopka_potverdit_vxod");
@@ -55,7 +65,9 @@ document.addEventListener("DOMContentLoaded",  async function() {
                 }
             }; 
         };
+*/
 
+/*
     knopka_potverdit_vxod.addEventListener("click", async function() {
 
     //Сама отправка и получение файлов cookie
@@ -94,7 +106,7 @@ document.addEventListener("DOMContentLoaded",  async function() {
             
         }
     })
-                  /*if(result.answer === UserData){
+                  if(result.answer === UserData){
                         let data = new Date();
                         data.setDate(data.getDate() + 3);
                         document.cookie = `id=6739; useremail=${encodeURIComponent(userEmail)}; expires=${data.toUTCString()}; path=/;`;

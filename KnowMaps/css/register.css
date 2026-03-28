@@ -1,0 +1,101 @@
+/* Основные стили для меню */
+.menu1 {
+    background-color: rgb(4, 4, 4);/* Серый цвет фона для меню */
+    color: white; /* Цвет текста в меню белый */
+    padding: 5px; /* Отступы вокруг содержимого меню */
+    display: grid; /* Используем CSS Grid для компоновки элементов */
+    grid-template-columns: repeat(6, auto); /* Создаем 6 колонок с автоматической шириной */
+    align-items: center; /* Выравнивание элементов по центру по вертикали */
+    height: 70px; /* Высота меню */
+}
+
+/* Стили для тела страницы */
+body {
+    margin: 0; /* Убираем отступы по умолчанию у body */
+    overflow: hidden; /* Скрываем любые полосы прокрутки */
+    background-color: rgb(10, 10, 10);
+}
+
+/* Стили для заголовка меню */
+.menu-head {
+    font-family: 'Courier New', Courier, monospace; /* Шрифт для заголовка меню */
+}
+/* Стили для пунктов меню */
+
+.KnowMap, .FAQ, .Nastr, .History, .Akkaynt {
+    font-size: 30px; /* Размер шрифта для пунктов меню */
+    text-align: center; /* Центрируем текст в пунктах меню */
+    justify-self: center; /* Выравнивание элементов по центру в сетке */
+    cursor: pointer; /* Указатель мыши при наведении на элемент */
+    transition: 1s; /* Плавный переход для эффектов при наведении */
+}
+
+/* Эффекты при наведении на пункты меню */
+.KnowMap:hover, /* Закомментированное правило для .nadpis-fail:hover */ 
+.FAQ:hover, .Nastr:hover, .History:hover, .Akkaynt:hover {
+    transform: scale(1.2); /* Увеличиваем размер элемента при наведении */
+}
+
+.window_register_main{
+    justify-self: center;
+}
+.window_register{
+    width: 400px;
+    height: 400px;
+    background: rgb(255,152,0);
+    border-radius: 10px;   
+    display: grid;
+    grid-template-rows: repeat(4, 25);
+    font-family: 'Courier New', Courier, monospace;
+}
+.title_register{
+    color: white;
+    font-size: 30px;
+    justify-self: center;
+    align-self:center;
+    margin-top: 100px;
+    margin-bottom: 0;
+}
+.email_window_register, .window_register_password, .window_replay_register_password{
+    display: grid;
+    grid-template-rows: repeat(2, 50%);
+}
+.button_regiter_or_etrance{
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+}
+
+.input_email_register, .input_password_register, .input_replay_password_register{
+    width: 70%;
+    height: 20px;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 3px 3px 4px rgb(12, 12, 12);
+    background-color: rgb(255,152,0);
+    margin-left: 20px;
+}
+input:-webkit-autofill{
+    border: none;
+    -webkit-text-fill-color: black;
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-box-shawod: 0 0 0px 1000px rgb(34, 35, 42) inset;
+}
+.title_email_register, .title_password_register, .title_replay_password_register{
+    font-size: 18px;
+    margin-left: 20px;
+}
+.button_register, .button_etrance{
+    width: 120px;
+    height: 50px;
+    justify-self: center;
+    border: none;
+    outline: none;
+    box-shadow: 3px 3px 4px black;
+    border-radius: 3px;
+    background: rgb(255,152,0);
+    cursor: pointer;
+}
+.button_register:active, .button_etrance:active{
+    background: white;
+}

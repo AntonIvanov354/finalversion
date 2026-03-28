@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>KnowMa1p</title>
+
+    <script src="./java/register.js" type="module"></script>
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="website icon" type="png" href="foto/logo__ved_sait.png">
+
+</head>
+<body>
+
+<header id="menu-head" class="menu-head">
+    <div class="menu1">
+        <p onclick="window.location.href='./glav1.html'" class="KnowMap">KnowMap</p>
+        <p onclick="window.location.href='./account.html'" class="Akkaynt">Аккаунт</p>
+        <p onclick="alert(`К сожеление данный раздел пока не доступен`)" class="History">История</p>
+        <p onclick="alert(`К сожеление данный раздел пока не доступен`)" class="Nastr">Настройки</p>
+        <p onclick="window.location.href=`./FAQ.html`" class="FAQ">FAQ</p>
+    </div>
+</header>
+<main class="main_widow">
+
+    <div class="window_register_main">
+        <p class="title_register">Регистрация пользователя</p>
+        <div class="window_register">
+            <div class="email_window_register">
+                <p class="title_email_register">Введите вашу почту:</p>
+                <input type="email" class="input_email_register">
+            </div>
+            <div class="window_register_password">
+                <p class="title_password_register">Введите ваш пароль:</p>
+                <input type="password" 
+                       class="input_password_register" 
+                       id="input_password_register">
+            </div>
+            <div class="window_replay_register_password">
+                <p class="title_replay_password_register">Повторите ваш пароль:</p>
+                <input type="password" 
+                       class="input_replay_password_register" 
+                       id="input_replay_password_register">
+            </div>
+            <div class="button_regiter_or_etrance">
+                <button class="button_etrance" >Войти в аккаунт</button>
+                <button class="button_register" id="button_register">Регистрация аккаунта</button>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
