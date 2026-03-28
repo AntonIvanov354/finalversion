@@ -80,11 +80,59 @@ localStorage.setItem("idcooki", JSON.stringify({
             return finalListCookie;
             }
         }
+    //вывод
+    var emailUserInPage = document.getElementById("title_beggining_email");
+    emailUserInPage.textContent = userEmail();
+    
+    //Работа с редакцией имени
+    const serchUserName = () => {
+        const listCookie = document.cookie.split("; ");
+        const finalStep = listCookie.find(listCookie =>
+            listCookie.startsWith("name_user=")
+        );
 
-        //Вывод почты на сайт
-        var emailUserInPage = document.getElementById("title_beggining_email");
-        emailUserInPage.textContent = userEmail();
+        if(finalStep){
+            const nameUser = finalStep.split("=")[1];
+            return nameUser;
+        }else{
+            return "user1";
+        }
+    };
+    const windowSettingbutton = document.getElementById("window_info_button_settings");
+    const settingWindow = document.getElementById("seting_user_data");
+    const windowLiftBig = document.getElementById("window_left_info_user");
+    const optionWindowAccount = document.getElementById("window_options_button_settings");
+    const oldUserName = document.getElementById("window_email");
+    if(serchUserName == false){
+        console.log("Сидим не рыпаемся)")
+    }else{
+        oldUserName.textContent = serchUserName();  
+        console.log("A")
+    }
 
+    windowSettingbutton.addEventListener("click", function() {
+        windowLiftBig.style.width = "500px";
+        settingWindow.style.display = "block"
+    });
+
+    optionWindowAccount.addEventListener("click", async function() {
+        const newUserName = document.getElementById("window_name_option").value;
+        if(newUserName !== ""){
+            oldUserName.textContent = newUserName;
+            document.cookie = `user_name=${oldUserName}; max-age=-1`
+            document.cookie =`name_user=${newUserName}`;
+            document.getElementById("window_name_option").value = "";
+
+            windowLiftBig.style.width = "250px";
+            settingWindow.style.display = "none";
+        }else{
+            windowLiftBig.style.width = "250px";
+            settingWindow.style.display = "none";
+            return;
+        }    
+    });
+
+        
     /*
     const test = '322'
     document.cookie = `id=${42}; username=abama`;

@@ -28,16 +28,16 @@
                 <img src="./foto/profile_photo.png" 
                      alt="фото профиля" 
                      class="profile_photo">
-                <p class="title_beggining_email" id="title_beggining_email">Тут будет начало почты</p>
+                <p class="title_beggining_email" id="title_beggining_email"></p>
             </div>
         </div>
 
         <div class="window_profile_right">
-            <div class="window_left_info_user">
+            <div class="window_left_info_user" id="window_left_info_user">
                 <div class="window_info">
                     <div class="window_info_name">
                         <p class="title_name_user_info">Имя пользователя:</p>
-                        <p class="window_name">User1 и т.д.</p>
+                        <p class="window_name" id="window_email">User1 и т.д.</p>
                     </div>
                     <div class="window_info_email">
                         <p class="title_email_user_info">Почта:</p>
@@ -45,23 +45,22 @@
                     </div>
                     <div class="window_info_password">
                         <p class="title_password_user_info">Пароль:</p>
-                        <p class="window_password">*****</p>
+                        <p class="window_password" id="window_password">********</p>
                     </div>
                     <button class="window_info_button_settings"
                             id="window_info_button_settings">
                             Настройки данных аккаунта</button>
                 </div>
-                <div class="seting_user_data">
+                <div class="seting_user_data" id="seting_user_data" style="display: none;">
                     <div class="window_option_name">
                         <p class="title_name_user_option">Введите новое имя пользователя:</p>
                         <p class="options_window_name_options">
                             <input class="window_name_option"
+                            id="window_name_option"
                             type="text">
                         </p>
                     </div>
-                    <div class="window_option_password">
-                        <p class="title_password_user_option">(⊙ _ ⊙ ) (─‿‿─)</p>
-                    </div>
+                    <div class="none_window"></div>
                     <button class="window_options_button_settings"
                         id="window_options_button_settings">
                         Сохранить новые данные</button>
