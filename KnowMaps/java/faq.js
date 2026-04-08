@@ -1,14 +1,3 @@
-/*document.querySelectorAll('.vopros_1, .vopros_2, .vopros_3, .vopros_4, .vopros_5').forEach((vopros, index) => {
-    vopros.addEventListener("mouseenter", () => {
-        document.querySelector(`.otvet_${index + 1}`).classList.add("otvet_podsvetka");
-
-    });
-    vopros.addEventListener("mouseleave", () => {
-        document.querySelector(`.otvet_${index + 1}`).classList.remove("otvet_podsvetka");
-
-    });
-});GTP ДАУН*/
-
 document.addEventListener("DOMContentLoaded", function(){
 
     /*Потом все сделаю норм, ну эт тип классы, которые я буду заменять*/
@@ -17,13 +6,6 @@ document.addEventListener("DOMContentLoaded", function(){
     const otvet_3 = document.getElementById("otvet_3");
     const otvet_4 = document.getElementById("otvet_4");
     const otvet_5 = document.getElementById("otvet_5");
-    /*Ну туту ниже будет на какой я класс буду заменять*/
-    /*const otvet_1_zamena = document.getElementById("otvet_1_zamena");
-    const otvet_2_zamena = document.getElementById("otvet_2_zamena");
-    const otvet_3_zamena = document.getElementById("otvet_3_zamena");
-    const otvet_4_zamena = document.getElementById("otvet_4_zamena");
-    const otvet_5_zamena = document.getElementById("otvet_5_zamena");
-    Она не пригодилась(*/
     /*При наведение на какие классы будет происхоидить МЭДЖИК */
     const vopros_1 = document.getElementById("vopros_1");
     const vopros_2 = document.getElementById("vopros_2");

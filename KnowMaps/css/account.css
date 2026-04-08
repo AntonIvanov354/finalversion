@@ -59,6 +59,7 @@ body {
     align-self: end;
     justify-self: right;
     pointer-events: none;
+    border-radius: 4px;
 }
 .title_beggining_email{
     color: rgb(255,152,0);
@@ -79,6 +80,7 @@ body {
     grid-template-columns: repeat(2, 50%);
     background: rgb(255,152,0);
     transition: 0.2s;
+    border-radius: 5px;
 }
 .window_info, .seting_user_data{
     display: grid;
@@ -98,8 +100,8 @@ body {
     background: rgb(255,152,0);
     display: block;
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-    border-radius: 2px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    box-shadow:  10px 10px 15px rgba(0, 0, 0, 0.4);
     width: 200px;
     height: 50%;
     margin: 0;
@@ -111,9 +113,9 @@ body {
     width: 150px;
     background: rgb(255,152,0);
     outline: none;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    border-radius: 2px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+    border:none;
+    border-radius: 5px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.4);
     cursor: pointer;
     margin-left: 20px;
 }
@@ -141,15 +143,20 @@ body {
     outline: none;
     width: 100%;
 }
-
+input:-webkit-autofill{
+    border: none;
+    -webkit-text-fill-color: rgb(5, 5, 5);
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-box-shawod: 0 0 0px 1000px rgb(32, 35, 42) inset;
+}
 .window_options_button_settings{
     align-self: center;
     width: 150px;
     background: rgb(255,152,0);
+    border: none;
     outline: none;
-    border: 1px solid rgba(0, 0, 0, 0.4);
     border-radius: 2px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.4);
     cursor: pointer;
     margin-top: 20px;
 }

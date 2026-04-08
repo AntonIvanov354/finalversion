@@ -118,6 +118,7 @@ document.addEventListener("DOMContentLoaded", async function() {
                     document.cookie = `${userData.email}=${requestEntrance.data.access_token}; max-age=172800;`;
                     //Создание cookie с почтой пользователя
                     document.cookie = `email_user=${userData.email}; max-age=172800;`; 
+                    document.location.href = "./account.html"
                     console.log(document.cookie);
 
                 }else{

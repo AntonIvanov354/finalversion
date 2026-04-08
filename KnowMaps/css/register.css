@@ -71,7 +71,7 @@ body {
     outline: none;
     border: none;
     border-radius: 3px;
-    box-shadow: 3px 3px 4px rgb(12, 12, 12);
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.4);
     background-color: rgb(255,152,0);
     margin-left: 20px;
 }
@@ -87,12 +87,12 @@ input:-webkit-autofill{
 }
 .button_register, .button_etrance{
     width: 120px;
-    height: 50px;
+    height: 40px;
     justify-self: center;
     border: none;
     outline: none;
-    box-shadow: 3px 3px 4px black;
-    border-radius: 3px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
     background: rgb(255,152,0);
     cursor: pointer;
 }

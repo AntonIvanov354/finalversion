@@ -1,6 +1,6 @@
-const url = "http://127.0.0.1:8000/id"
-document.addEventListener("DOMContentLoaded", async function(){
 
+document.addEventListener("DOMContentLoaded", async function(){
+    //Поиск нужной почты через cookie 
     const userEmail = () => {
         const cookieList = document.cookie.split("; ");
         const serchEmail = cookieList.find(cookieList => 
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async function(){
         window.location.href = "./etrance.html"
     }
 
-    //вывод
+    //Вывод
     var emailUserInPage = document.getElementById("title_beggining_email");
     emailUserInPage.textContent = userEmail();
     
@@ -46,26 +46,32 @@ document.addEventListener("DOMContentLoaded", async function(){
             const nameUser = finalStep.split("=")[1];
             return nameUser;
         }else{
-            return "user1";
+            return "У данного пользователя нет name_user=.... !!!";
         }
     };
+
+    //Добавление кучи переменных, они нужны. Убираем одну и весь алгоритм ломаеться!
     const windowSettingbutton = document.getElementById("window_info_button_settings");
     const settingWindow = document.getElementById("seting_user_data");
     const windowLiftBig = document.getElementById("window_left_info_user");
     const optionWindowAccount = document.getElementById("window_options_button_settings");
     const oldUserName = document.getElementById("window_email");
+    
+    //Проверка на наличии создании имени раньше
     if(serchUserName == false){
         console.log("Сидим не рыпаемся)")
     }else{
         oldUserName.textContent = serchUserName();  
         console.log("A")
     }
-
+    
+    //Функция открытия меню настроек
     windowSettingbutton.addEventListener("click", function() {
         windowLiftBig.style.width = "500px";
         settingWindow.style.display = "block"
     });
 
+    //Функция смены имени
     optionWindowAccount.addEventListener("click", async function() {
         const newUserName = document.getElementById("window_name_option").value;
         if(newUserName !== ""){
