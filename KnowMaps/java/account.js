@@ -1,40 +1,19 @@
 
 document.addEventListener("DOMContentLoaded", async function(){
-    //Поиск нужной почты через cookie 
-    const userEmail = () => {
-        const cookieList = document.cookie.split("; ");
-        const serchEmail = cookieList.find(cookieList => 
-            cookieList.startsWith(`email_user=`)
-            )  
-        if(serchEmail){
-            const finalListCookie = serchEmail.split("=")[1];
-            return finalListCookie;
-            }
-        }
-
-    //проверка cookie позьзователя
-    const userJwtJoket = (userEmail) => {
-        const cookieList = document.cookie.split("; ");
-        const serchJwt = cookieList.find(cookieList =>
-            cookieList.startsWith(`${userEmail}=`)
-        );
-        if(serchJwt){
-            const finalJwt = serchJwt.split("=")[1]
-            return finalJwt;
-        }else{
-            return ""
-        }
-    }
-    if(userJwtJoket(userEmail()) !== ""){
-        console.log("Вход разрещён")
-    }else{
-        window.location.href = "./etrance.html"
-    }
-
-    //Вывод
-    var emailUserInPage = document.getElementById("title_beggining_email");
-    emailUserInPage.textContent = userEmail();
+    //Добавление нужных элементов/переменных/функиций
     
+    //Все необохидые элементы
+    const windowSettingbutton = document.getElementById("window_info_button_settings");
+    const settingWindow = document.getElementById("seting_user_data");
+    const windowLiftBig = document.getElementById("window_left_info_user");
+    const optionWindowAccount = document.getElementById("window_options_button_settings");
+    const oldUserName = document.getElementById("window_name");
+
+    //Проверка, что все элементы считались удачно
+    if(!windowSettingbutton || !settingWindow || !windowLiftBig || !optionWindowAccount || !oldUserName){
+        console.error("Один из элементов являеться пустым!")
+        return;
+    };
     //Работа с редакцией имени
     const serchUserName = () => {
         const listCookie = document.cookie.split("; ");
@@ -46,24 +25,44 @@ document.addEventListener("DOMContentLoaded", async function(){
             const nameUser = finalStep.split("=")[1];
             return nameUser;
         }else{
-            return "У данного пользователя нет name_user=.... !!!";
+            return "User1";
         }
     };
 
-    //Добавление кучи переменных, они нужны. Убираем одну и весь алгоритм ломаеться!
-    const windowSettingbutton = document.getElementById("window_info_button_settings");
-    const settingWindow = document.getElementById("seting_user_data");
-    const windowLiftBig = document.getElementById("window_left_info_user");
-    const optionWindowAccount = document.getElementById("window_options_button_settings");
-    const oldUserName = document.getElementById("window_email");
-    
-    //Проверка на наличии создании имени раньше
-    if(serchUserName == false){
-        console.log("Сидим не рыпаемся)")
-    }else{
-        oldUserName.textContent = serchUserName();  
-        console.log("A")
+
+    //проверка cookie позьзователя
+    const userJwt = () => {
+        try{
+            const cookieList = document.cookie.split("; ");
+            const serchJwt = cookieList.find(cookieList =>
+                cookieList.startsWith(`jwt_token=`)
+            );
+            
+            if(serchJwt){
+                const finalJwt = serchJwt.split("=")[1]
+                return {success: true, data:finalJwt}
+            }else{
+                return {success: false, data: "У данного пользователя нет cookie "}
+            };
+            
+        }catch(error){
+            return{
+                success:false,
+                data: error
+            }
+        };
+    };
+
+    //Проверка, можно ли пустить пользователя на данную страничку
+    const result_cookie =  userJwt();
+    if(!result_cookie.success){
+        window.location.href = "./etrance.html";
+        alert(result_cookie.data)
+        return;
     }
+
+    //Добавление имени на сайт
+    oldUserName.textContent = serchUserName();
     
     //Функция открытия меню настроек
     windowSettingbutton.addEventListener("click", function() {
@@ -76,16 +75,11 @@ document.addEventListener("DOMContentLoaded", async function(){
         const newUserName = document.getElementById("window_name_option").value;
         if(newUserName !== ""){
             oldUserName.textContent = newUserName;
-            document.cookie = `user_name=${oldUserName}; max-age=-1`
             document.cookie =`name_user=${newUserName}`;
             document.getElementById("window_name_option").value = "";
+        };
 
-            windowLiftBig.style.width = "250px";
-            settingWindow.style.display = "none";
-        }else{
-            windowLiftBig.style.width = "250px";
-            settingWindow.style.display = "none";
-            return;
-        }    
+        windowLiftBig.style.width = "250px";
+        settingWindow.style.display = "none";
     });
 });

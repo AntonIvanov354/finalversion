@@ -1,12 +1,33 @@
 // Ждем, пока весь HTML-документ будет загружен и разобран
 document.addEventListener("DOMContentLoaded", async function() {
-    //Все необходимые элементы/переменные
+    //Все необходимые элементы/переменные/функции
+
+    //Ошибка в почте
+    const print_error_email_and_password = () => {
+        const id_window_error_email = document.getElementById("title_error_email");
+        const id_window_error_password = document.getElementById("title_error_password");
+        id_window_error_email.style.display = "block";
+        id_window_error_password.style.display = "block";
+    };
+
+    //все необходимые переменные
     const url = "http://127.0.0.1:8000/users/login";
     const registerButton = document.getElementById("buttonEntrance");
-    //Нажатие кнопки, после чего происходит проверка данных на сервере и в дальнейшем выводе либо ошибки либо вход в аккаунт
+
+    //Отправка данных на сайт
     registerButton.addEventListener("click", async function() {
-          // Отправка данных на сервак
-            await requestEntranceServer();
+            // Получаем все необходимые элементы из DOM по их ID
+            const window_email_data = document.getElementById("window_email_data").value;
+            const window_password_data = document.getElementById("window_password_data").value;
+
+            //Проверка на пустые строки
+            if(!window_email_data || !window_password_data){
+                print_error_email_and_password();
+                return
+            };
+
+            // Отправка данных на сервер
+            await requestEntranceServer(window_email_data, window_password_data);
         });
 
         async function makeRequest(url, options = {}) {
@@ -33,13 +54,9 @@ document.addEventListener("DOMContentLoaded", async function() {
             try{
                 const response = await fetch(url, mergeOptionst);
 
-                if(response.status === 401){
-                    const text = await response.json();
-                    return {success: true, data: text, status: response.status};
-                }
-                else{
                     if(!response.ok){
-                        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+                        const data_error = await response.json();
+                        return {success: false, data: data_error, status: response.status}
                     }
 
                     try{
@@ -51,54 +68,21 @@ document.addEventListener("DOMContentLoaded", async function() {
                         return {success: true, data: text, status: response.status}
                     }
                 }
-            }catch(error){
+            //}
+            catch(e){
                 return {
                     success: false,
-                    error: error.message,
-                    status: error.status || 0
+                    data: e,
+                    status: 0
                 }
             }
         }
-    const  requestEntranceServer = async () =>{   
-        // Получаем все необходимые элементы из DOM по их ID
-        const window_email_data = document.getElementById("window_email_data").value;
-        const window_password_data = document.getElementById("window_password_data").value;
-
-        //Все неоходимые функции
-
-        //Ошибка в почте
-        const print_error_email_and_password = async() => {
-            const id_window_error_email = document.getElementById("title_error_email");
-            const id_window_error_password = document.getElementById("title_error_password");
-            id_window_error_email.style.display = "block";
-            id_window_error_password.style.display = "block";
-        };
-        
-        //Поиск нужных cookie
-        const SearchForAnOppCookie = (email) => {
-        
-            const cookieString = document.cookie;
-            const cookies = cookieString.split(";");
-
-            const targetCookie = cookies.findLast(cookie => 
-                cookie.startsWith(email + "=")
-            );
-
-            if(targetCookie){
-                return targetCookie.split("=")[1];
-            };
-
-            return null;
-        };
-
-        //Все необходимые списки
-
+    const requestEntranceServer = async (email, password) =>{   
+    
         //Создание спика для отправки на сервер
         const userData = {
-            email: window_email_data,
-            password: window_password_data,
-            // Не нужно и все:
-            // cookie: SearchForAnOppCookie(window_email_data)
+            email: email,
+            password: password,
         };
 
         //Запрос на сервер
@@ -108,28 +92,26 @@ document.addEventListener("DOMContentLoaded", async function() {
                 body: userData
             });
             // Если пароль не подходит или почта, выкидываем ошибку.
-            if(!requestEntrance.ok && requestEntrance.status === 401){
-                print_error_email_and_password();
-                return console.log(`Error password or mail! ${requestEntrance.status}`);
-            }else{
-                if(requestEntrance.success){
+            if(requestEntrance.success){                
                     // jwt.token: requestEntrance.data.access_token
-                    // должен добавить Арс, не я: path=/; samesite=lax; secure;
-                    document.cookie = `${userData.email}=${requestEntrance.data.access_token}; max-age=172800;`;
-                    //Создание cookie с почтой пользователя
-                    document.cookie = `email_user=${userData.email}; max-age=172800;`; 
+
+                    //создание cookie 
+                    document.cookie = `jwt_token=${requestEntrance.data.access_token}; max-age=172800; samesite=strict; path=/`;
                     document.location.href = "./account.html"
                     console.log(document.cookie);
-
-                }else{
-                    console.log('Ошибка в обработке ответа от сервера!');
+            }else{
+                if(requestEntrance.status == 401){
                     print_error_email_and_password();
+                    console.log(`Error password or mail! ${requestEntrance.status}`);
                 }
+                throw new Error(`Ошибка в ответе сервера: ${requestEntrance.status}`)
             }
+            
         }catch(jsonError){
             console.log(`Критическая ошибка: ${jsonError}`);
             print_error_email_and_password();
             return;
-        }
+        };
     };
+    
 });
