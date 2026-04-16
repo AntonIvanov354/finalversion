@@ -1,25 +1,50 @@
 document.addEventListener("DOMContentLoaded",  async function() {
+    
+    //Все необходимые элементы/переменные/функции
 
-    const registerPasswordWindow = document.getElementById("input_password_register").value;
-    const registerPasswordWindowReplay =  document.getElementById("input_replay_password_register").value;
+    //Все необходимые функции
+
+    //Все необходимые переменные
+    const url = "http://127.0.0.1:8000/users/"
+    //Все необходимые элементы
     const buttonRegister = document.getElementById("button_register");
 
-    buttonRegister.addEventListener("click", function() {
-        if(registerPasswordWindow !== registerPasswordWindowReplay){
-            console.log("a")
-        }
-    })
+    //Отправка данных на сервер
+    buttonRegister.addEventListener("click", async function(){
+        try{ 
+                //Считыеваем все необходимые данны с страницы
+                const password =  document.getElementById("input_password_register").value;
+                const password_Replay =  document.getElementById("input_replay_password_register").value;
+                const mail = document.getElementById("input_email_register").value
 
-/*   const url = "http://127.0.0.1:8000/entrance"
-    //const printIdCooki = JSON.parse(localStorage.getItem("idcooki") || `{"id": null}`)
+                //Проверка, что окна не пустые или соотвествуют стандарту
+                if((password !== password_Replay) && !password || !password){
+                    console.error(`Password one ≠ password two!`)
+                    return;
+                };
+                if(!/^[A-Za-z0-9]+$/.test(password)){
+                    console.error("Пароль содержит невалидирумые символы!");
+                    return;
+                }
+                if(!mail || !mail.includes("@") || !mail.includes(".")){
+                    console.error(`The mail does not meet the standard!`)
+                    return;
+                }
+                if(mail.length < 8){
+                    console.error("Пароль должен быть больше 8 символов!")
+                    return;
+                }
+                
+                console.log(mail, password)
+                await server_response(mail ,password);
 
-    const knopka_potverdit_vxod = document.getElementById("knopka_potverdit_vxod");
-    const okno_vxoda_osnova = document.getElementById("okno_vxoda_osnova");
-    const okno_vxod_osnova_2 = document.getElementById("okno_vxod_osnova_2");
-    const nadpis_yspex2 = document.getElementById("nadpis_yspex");
+        }catch(error){
+            console.error(error)
+        };
+    });
 
-    //Универсальный(наверное) код на отправку данных и получения cookie пользователя
-    const cookieCheck = async (url, options = {}) => {
+    //Функция запроса
+    const request_form = async (url, options = {}) => {
         const defaultOptionss = {
             method: "POST",
             headers: {
@@ -35,27 +60,32 @@ document.addEventListener("DOMContentLoaded",  async function() {
                 ...options.headers
             },
         };
-         if(options.body && typeof options.body == `object`){
+            if(options.body && typeof options.body == `object`){
                 mergeOptionsst.body = JSON.stringify(options.body)
             };
 
         try{
             const response = await fetch(url, mergeOptionsst);
-            if(response.status === 401){
-                const text = await response.text();
-                console.log(text)
-                return{success:false, status: response.status, data: text};
-            }
+            if(response.status === 422){
+                try{
+                    const data = await response.json();
+                    return {success: false, data, status: response.status}
+                }catch(jsonError){
+                    const text = await response.text();
+                    return {success: false, data: text, status: response.status}
+                }
+            };
+
             if(!response.ok){
-                throw new Error(`Запрос на проверку cooki не удался, сервер не отвечает: ${response.status}!`);
+                throw new Error(`Сервер не отвечает: ${response.status}!`);
             }
             try{
                 const data = await response.json();
                 return {success: true, data, status: response.status};
 
             }catch(jsonError){
-               const text = await response.text()
-               return{success:true, data: text, status: response.status};
+                const text = await response.text()
+                return{success:true, data: text, status: response.status};
             }
         }catch(error){
             return{
@@ -65,9 +95,43 @@ document.addEventListener("DOMContentLoaded",  async function() {
                 }
             }; 
         };
-*/
+    
+    const server_response = async(email, password) => {
 
-/*
+        //Создание спика для отправки на сервер
+        const User_data = {
+            user_email: email,
+            user_password: password
+        };
+        
+        console.log(User_data)
+        try{
+            const request = await request_form(url, {
+                method: "POST",
+                body: User_data
+            });
+            if(request.success){
+                console.log(request.data)
+            }else{
+                console.log(request.data)
+            }
+
+        }catch(jsonError){
+            console.error(jsonError)
+        };
+    };
+
+});
+/*   const url = "http://127.0.0.1:8000/entrance"
+    //const printIdCooki = JSON.parse(localStorage.getItem("idcooki") || `{"id": null}`)
+
+    const knopka_potverdit_vxod = document.getElementById("knopka_potverdit_vxod");
+    const okno_vxoda_osnova = document.getElementById("okno_vxoda_osnova");
+    const okno_vxod_osnova_2 = document.getElementById("okno_vxod_osnova_2");
+    const nadpis_yspex2 = document.getElementById("nadpis_yspex");
+
+    //Универсальный(наверное) код на отправку данных и получения cookie пользователя
+
     knopka_potverdit_vxod.addEventListener("click", async function() {
 
     //Сама отправка и получение файлов cookie
@@ -118,8 +182,8 @@ document.addEventListener("DOMContentLoaded",  async function() {
             }catch(error){
                 alert(`Произошла критическая ошибка: ${error}`)
                 return;
-            }*/;
-        /*
+            };
+        
     async function LoginInformation(url, optionss = {}) {
         const defaulOptionss = {
             method: "GET",
@@ -171,6 +235,11 @@ document.addEventListener("DOMContentLoaded",  async function() {
     }
 
     try{
+            alert("Ошибка создания: ", result .error)
+        } 
+    } catch (error) {
+        alert("Ошибка выполнения: ", error)
+    }
         const result  = await LoginInformation(url, {
             method: "POST",
             body: LoginUser
@@ -187,19 +256,18 @@ document.addEventListener("DOMContentLoaded",  async function() {
             okno_vxoda_osnova.classList.toggle("okno_vxoda_osnova_itog");
             okno_vxod_osnova_2.classList.toggle("okno_vxod_osnova_1")
             nadpis_yspex2.classList.toggle("nadpis_yspex2")
-          //  }
-            //else if(printIdCooki !== result.data.user.cooki){
+            }
+            else if(printIdCooki !== result.data.user.cooki){
 
-             //   localStorage.setItem("idcooki", JSON.stringify({
-               //     id: result.data.user.id
-               // }))
+               localStorage.setItem("idcooki", JSON.stringify({
+                    id: result.data.user.id
+                }))
 
-               // alert("данные все равно обновил"+ result.message)
-          //  }
+                alert("данные все равно обновил"+ result.message)
+            }
         } else{
             alert("Ошибка создания: ", result .error)
         } 
     } catch (error) {
         alert("Ошибка выполнения: ", error)
     }*/
-    });
